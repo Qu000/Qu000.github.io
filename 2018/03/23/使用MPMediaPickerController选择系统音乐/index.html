@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>选择、播放系统音乐 | iOS_July的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="MPMediaPickerController选择系统音乐一、介绍   在播放本地音乐时，还需要为用户提供选择音乐文件的功能，一般都会列出一个本地音乐列表。  iOS系统为此提供了MPMediaPickerController[多媒体选择器]。MPMediaPickerController能展示一个默认的视图，供用户选择音乐文件。">
+  <meta name="description" content="MPMediaPickerController选择系统音乐一、介绍 在播放本地音乐时，还需要为用户提供选择音乐文件的功能，一般都会列出一个本地音乐列表。  iOS系统为此提供了MPMediaPickerController[多媒体选择器]。MPMediaPickerController能展示一个默认的视图，供用户选择音乐文件。">
 <meta name="keywords" content="iOS,重修笔记">
 <meta property="og:type" content="article">
 <meta property="og:title" content="选择、播放系统音乐">
 <meta property="og:url" content="http://yoursite.com/2018/03/23/使用MPMediaPickerController选择系统音乐/index.html">
 <meta property="og:site_name" content="iOS_July的博客">
-<meta property="og:description" content="MPMediaPickerController选择系统音乐一、介绍   在播放本地音乐时，还需要为用户提供选择音乐文件的功能，一般都会列出一个本地音乐列表。  iOS系统为此提供了MPMediaPickerController[多媒体选择器]。MPMediaPickerController能展示一个默认的视图，供用户选择音乐文件。">
+<meta property="og:description" content="MPMediaPickerController选择系统音乐一、介绍 在播放本地音乐时，还需要为用户提供选择音乐文件的功能，一般都会列出一个本地音乐列表。  iOS系统为此提供了MPMediaPickerController[多媒体选择器]。MPMediaPickerController能展示一个默认的视图，供用户选择音乐文件。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-03-23T03:19:22.596Z">
+<meta property="og:updated_time" content="2018-03-23T03:25:22.525Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="选择、播放系统音乐">
-<meta name="twitter:description" content="MPMediaPickerController选择系统音乐一、介绍   在播放本地音乐时，还需要为用户提供选择音乐文件的功能，一般都会列出一个本地音乐列表。  iOS系统为此提供了MPMediaPickerController[多媒体选择器]。MPMediaPickerController能展示一个默认的视图，供用户选择音乐文件。">
+<meta name="twitter:description" content="MPMediaPickerController选择系统音乐一、介绍 在播放本地音乐时，还需要为用户提供选择音乐文件的功能，一般都会列出一个本地音乐列表。  iOS系统为此提供了MPMediaPickerController[多媒体选择器]。MPMediaPickerController能展示一个默认的视图，供用户选择音乐文件。">
   
     <link rel="alternative" href="/atom.xml" title="iOS_July的博客" type="application/atom+xml">
   
@@ -185,9 +185,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="MPMediaPickerController选择系统音乐"><a href="#MPMediaPickerController选择系统音乐" class="headerlink" title="MPMediaPickerController选择系统音乐"></a>MPMediaPickerController选择系统音乐</h2><h3>一、介绍</h3>
-
-<ul>
+        <h2 id="MPMediaPickerController选择系统音乐"><a href="#MPMediaPickerController选择系统音乐" class="headerlink" title="MPMediaPickerController选择系统音乐"></a>MPMediaPickerController选择系统音乐</h2><h3 id="一、介绍"><a href="#一、介绍" class="headerlink" title="一、介绍"></a>一、介绍</h3><ul>
 <li><p>在播放本地音乐时，还需要为用户提供选择音乐文件的功能，一般都会列出一个本地音乐列表。</p>
 </li>
 <li><p>iOS系统为此提供了MPMediaPickerController<code>[多媒体选择器]</code>。MPMediaPickerController能展示一个默认的视图，供用户选择音乐文件。 </p>
@@ -242,19 +240,24 @@
 <ul>
 <li>展示控制器</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//以modal的方式显示视图即可  </span><br><span class="line">[self presentViewController:picker animated:YES completion:nil];   </span><br><span class="line"></span><br><span class="line">```   </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">* 获取用户选择的音乐文件</span><br></pre></td></tr></table></figure>
-<p>用户在选择完要播放的音乐文件后，需要用MPMediaPickerController类的代理方法来获取音乐文件。<br>它的代理必须遵守MPMediaPickerControllerDelegate协议</p>
+<pre><code>//以modal的方式显示视图即可  
+[self presentViewController:picker animated:YES completion:nil];   
+
+</code></pre><ul>
+<li>获取用户选择的音乐文件    </li>
+</ul>
 <pre><code>
+用户在选择完要播放的音乐文件后，需要用MPMediaPickerController类的代理方法来获取音乐文件。
+它的代理必须遵守MPMediaPickerControllerDelegate协议 
 
-</code></pre><p>//当用户选择了某个音乐文件后调用<br>//需要注意的是，在这个方法里要将控制器的视图注销，回到当前之前的视图</p>
-<ul>
-<li>(void)mediaPicker:(MPMediaPickerController <em>)mediaPicker didPickMediaItems:(MPMediaItemCollection </em>)mediaItemCollection;</li>
-</ul>
-<p>//用户取消选择之后调用</p>
-<ul>
-<li>(void)mediaPickerDidCancel:(MPMediaPickerController *)mediaPicker;<br><code>`</code>    </li>
-</ul>
+</code></pre><pre><code>
+//当用户选择了某个音乐文件后调用
+//需要注意的是，在这个方法里要将控制器的视图注销，回到当前之前的视图
+- (void)mediaPicker:(MPMediaPickerController *)mediaPicker didPickMediaItems:(MPMediaItemCollection *)mediaItemCollection;
 
+//用户取消选择之后调用
+- (void)mediaPickerDidCancel:(MPMediaPickerController *)mediaPicker;  
+</code></pre>
       
 
       
