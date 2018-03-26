@@ -17,7 +17,7 @@
 <meta property="og:description" content="在实际开发过程中，经常会发现系统自带的UITabBarViewController满足不了项目需求。这时候，就需要自定义一个满足需求的UITabBarViewController了。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5129507-29aa0d282016bf30.gif?imageMogr2/auto-orient/strip">
-<meta property="og:updated_time" content="2018-03-26T10:02:28.684Z">
+<meta property="og:updated_time" content="2018-03-26T10:03:11.229Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="自定义UITabBarController">
 <meta name="twitter:description" content="在实际开发过程中，经常会发现系统自带的UITabBarViewController满足不了项目需求。这时候，就需要自定义一个满足需求的UITabBarViewController了。">
@@ -310,6 +310,24 @@ typedef void(^TabBlock)(JHTabBar * tabBar,JHItemType index);
             btn.frame = CGRectMake((btn.tag - JHItemTypeLeft)*w, 0, w, self.frame.size.height);
         }
     }
+}     
+
+</code></pre><ul>
+<li>响应方法     </li>
+</ul>
+<pre><code>
+- (void)clickItem:(UIButton *)button{
+    //判断代理是否能响应某个方法
+    if ([self.delegate respondsToSelector:@selector(tabBar:clickBtn:)]) {
+        [self.delegate tabBar:self clickBtn:button.tag];
+    }
+
+    //走block
+    //!self.block?:self.block(self,button.tag)
+    if (self.block) {
+        self.block(self, button.tag);
+    }
+
 }     
 
 </code></pre>
