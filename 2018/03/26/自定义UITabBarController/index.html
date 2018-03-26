@@ -8,20 +8,20 @@
   <link rel="dns-prefetch" href="https://qu000.github.io">
   <title>iOS_July的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="title: 自定义UITabBarControllerdate: 2018-03-26 16:37:25tags:   iOS 重修笔记 项目解析            12345678910111213在实际开发过程中，经常会发现系统自带的UITabBarViewController满足不了项目需求。这时候，就需要自定义一个满足需求的UITabBarViewController了。```">
+  <meta name="description" content="title: 自定义UITabBarControllerdate: 2018-03-26 16:37:25tags:  - iOS - 重修笔记 - 项目解析           12345678910111213在实际开发过程中，经常会发现系统自带的UITabBarViewController满足不了项目需求。这时候，就需要自定义一个满足需求的UITabBarViewController了。`">
 <meta name="keywords" content="iOS,HTML5,开发者,Coder,视频直播,微信小程序,未毕业">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS_July的博客">
 <meta property="og:url" content="https://qu000.github.io/2018/03/26/自定义UITabBarController/index.html">
 <meta property="og:site_name" content="iOS_July的博客">
-<meta property="og:description" content="title: 自定义UITabBarControllerdate: 2018-03-26 16:37:25tags:   iOS 重修笔记 项目解析            12345678910111213在实际开发过程中，经常会发现系统自带的UITabBarViewController满足不了项目需求。这时候，就需要自定义一个满足需求的UITabBarViewController了。```">
+<meta property="og:description" content="title: 自定义UITabBarControllerdate: 2018-03-26 16:37:25tags:  - iOS - 重修笔记 - 项目解析           12345678910111213在实际开发过程中，经常会发现系统自带的UITabBarViewController满足不了项目需求。这时候，就需要自定义一个满足需求的UITabBarViewController了。`">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5129507-29aa0d282016bf30.gif?imageMogr2/auto-orient/strip">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5129507-215a1acdeb65a8fd.gif?imageMogr2/auto-orient/strip">
-<meta property="og:updated_time" content="2018-03-26T08:53:14.749Z">
+<meta property="og:updated_time" content="2018-03-26T08:55:53.183Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS_July的博客">
-<meta name="twitter:description" content="title: 自定义UITabBarControllerdate: 2018-03-26 16:37:25tags:   iOS 重修笔记 项目解析            12345678910111213在实际开发过程中，经常会发现系统自带的UITabBarViewController满足不了项目需求。这时候，就需要自定义一个满足需求的UITabBarViewController了。```">
+<meta name="twitter:description" content="title: 自定义UITabBarControllerdate: 2018-03-26 16:37:25tags:  - iOS - 重修笔记 - 项目解析           12345678910111213在实际开发过程中，经常会发现系统自带的UITabBarViewController满足不了项目需求。这时候，就需要自定义一个满足需求的UITabBarViewController了。`">
 <meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/5129507-29aa0d282016bf30.gif?imageMogr2/auto-orient/strip">
   
     <link rel="alternative" href="/atom.xml" title="iOS_July的博客" type="application/atom+xml">
@@ -178,14 +178,12 @@
       
         <hr>
 <p>title: 自定义UITabBarController<br>date: 2018-03-26 16:37:25<br>tags: </p>
-<ul>
-<li>iOS</li>
-<li>重修笔记</li>
-<li>项目解析</li>
-</ul>
-<hr>
+<pre><code>- iOS
+- 重修笔记
+- 项目解析
+</code></pre><hr>
 <p><img src="https://upload-images.jianshu.io/upload_images/5129507-29aa0d282016bf30.gif?imageMogr2/auto-orient/strip" alt="tabBar0.gif">        </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">在实际开发过程中，经常会发现系统自带的UITabBarViewController满足不了项目需求。</span><br><span class="line">这时候，就需要自定义一个满足需求的UITabBarViewController了。</span><br><span class="line">```		</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 一、command + n		</span><br><span class="line"></span><br><span class="line">* 想要自定义UITabBarViewController，需要先创建一个继承于系统UITabBarViewController的类文件。		</span><br><span class="line"></span><br><span class="line">* 通常情况下，我们还需要自定义UITabBarViewController上的那个tabBar`[往往是重点]`，继承于UIView即可。		</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">* 如：</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">在实际开发过程中，经常会发现系统自带的UITabBarViewController满足不了项目需求。</span><br><span class="line">这时候，就需要自定义一个满足需求的UITabBarViewController了。</span><br><span class="line">```		</span><br><span class="line">&lt;!-- more --&gt;</span><br><span class="line"></span><br><span class="line">### 一、command + n		</span><br><span class="line"></span><br><span class="line">* 想要自定义UITabBarViewController，需要先创建一个继承于系统UITabBarViewController的类文件。		</span><br><span class="line"></span><br><span class="line">* 通常情况下，我们还需要自定义UITabBarViewController上的那个tabBar`[往往是重点]`，继承于UIView即可。		</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">* 如：</span><br></pre></td></tr></table></figure>
 <p>@interface JHTabBarViewController : UITabBarController<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
 <p>@interface JHTabBar : UIView<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">### 二、设置回调 		</span><br><span class="line"></span><br><span class="line">* 当我们点击某个tabBar时，需要用到回调来描述我们点击的究竟是什么，需要有什么样的效果。		</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">* 代理</span><br></pre></td></tr></table></figure></p>
 <p>@class JHTabBar;//2<br>//1、协议<br>@protocol JHTabBarDelegate <nsobject></nsobject></p>
@@ -536,7 +534,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">重修笔记</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -544,7 +542,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color5">重修笔记</a>
               </li>
             
             <div class="clearfix"></div>
