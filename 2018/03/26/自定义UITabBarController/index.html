@@ -17,7 +17,8 @@
 <meta property="og:description" content="在实际开发过程中，经常会发现系统自带的UITabBarViewController满足不了项目需求。这时候，就需要自定义一个满足需求的UITabBarViewController了。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5129507-29aa0d282016bf30.gif?imageMogr2/auto-orient/strip">
-<meta property="og:updated_time" content="2018-03-26T10:08:14.803Z">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5129507-9b00378db4e9a6c5.gif?imageMogr2/auto-orient/strip">
+<meta property="og:updated_time" content="2018-03-26T10:09:30.996Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="自定义UITabBarController">
 <meta name="twitter:description" content="在实际开发过程中，经常会发现系统自带的UITabBarViewController满足不了项目需求。这时候，就需要自定义一个满足需求的UITabBarViewController了。">
@@ -422,7 +423,22 @@ self.lastItem.selected = NO;
 button.selected = YES;
 self.lastItem = button;     
 
-</code></pre>
+</code></pre><h3 id="六、设置动画"><a href="#六、设置动画" class="headerlink" title="六、设置动画"></a>六、设置动画</h3><ul>
+<li>在响应事件<code>- (void)clickItem:(UIButton *)button{}</code>里     </li>
+</ul>
+<pre><code>
+//设置动画
+    [UIView animateWithDuration:0.2 animations:^{
+        button.transform = CGAffineTransformMakeScale(1.2, 1.2);//先扩大到1.2
+
+    }completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.2 animations:^{
+            button.transform = CGAffineTransformIdentity;//恢复
+        }];
+    }];     
+
+</code></pre><h3 id="此时效果图："><a href="#此时效果图：" class="headerlink" title="此时效果图："></a>此时效果图：</h3><p><img src="https://upload-images.jianshu.io/upload_images/5129507-9b00378db4e9a6c5.gif?imageMogr2/auto-orient/strip" alt="tabBar1.gif">     </p>
+
       
 
       
