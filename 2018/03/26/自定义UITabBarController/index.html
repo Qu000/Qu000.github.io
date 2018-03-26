@@ -17,7 +17,7 @@
 <meta property="og:description" content="在实际开发过程中，经常会发现系统自带的UITabBarViewController满足不了项目需求。这时候，就需要自定义一个满足需求的UITabBarViewController了。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5129507-29aa0d282016bf30.gif?imageMogr2/auto-orient/strip">
-<meta property="og:updated_time" content="2018-03-26T10:06:30.430Z">
+<meta property="og:updated_time" content="2018-03-26T10:08:14.803Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="自定义UITabBarController">
 <meta name="twitter:description" content="在实际开发过程中，经常会发现系统自带的UITabBarViewController满足不了项目需求。这时候，就需要自定义一个满足需求的UITabBarViewController了。">
@@ -395,6 +395,32 @@ typedef void(^TabBlock)(JHTabBar * tabBar,JHItemType index);
 -(void)tabBar:(JHTabBar *)tabBar clickBtn:(JHItemType)index{
     self.selectedIndex = index - JHItemTypeLeft;
 }     
+
+</code></pre><h3 id="五、添加lastItem"><a href="#五、添加lastItem" class="headerlink" title="五、添加lastItem"></a>五、添加lastItem</h3><ul>
+<li>在JHTabBar里     </li>
+</ul>
+<pre><code>
+/** 上一次点击的item */
+@property (nonatomic, strong) UIButton * lastItem;     
+
+</code></pre><ul>
+<li>在<code>- (instancetype)initWithFrame:(CGRect)frame NS_DESIGNATED_INITIALIZER;</code>里     </li>
+</ul>
+<pre><code>
+if (i==0) {
+                item.selected = YES;
+                self.lastItem = item;
+            }
+
+            [self addSubview:item];     
+
+</code></pre><ul>
+<li>在响应事件<code>- (void)clickItem:(UIButton *)button{}</code>里     </li>
+</ul>
+<pre><code>
+self.lastItem.selected = NO;
+button.selected = YES;
+self.lastItem = button;     
 
 </code></pre>
       
