@@ -17,7 +17,7 @@
 <meta property="og:description" content="在实际开发过程中，经常会发现系统自带的UITabBarViewController满足不了项目需求。这时候，就需要自定义一个满足需求的UITabBarViewController了。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5129507-29aa0d282016bf30.gif?imageMogr2/auto-orient/strip">
-<meta property="og:updated_time" content="2018-03-26T09:43:42.901Z">
+<meta property="og:updated_time" content="2018-03-26T09:46:19.976Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="自定义UITabBarController">
 <meta name="twitter:description" content="在实际开发过程中，经常会发现系统自带的UITabBarViewController满足不了项目需求。这时候，就需要自定义一个满足需求的UITabBarViewController了。">
@@ -208,7 +208,7 @@
 <li><p>如： </p>
 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@interface JHTabBarViewController : UITabBarController</span><br><span class="line">```	 	</span><br><span class="line"></span><br><span class="line">```		</span><br><span class="line">@interface JHTabBar : UIView			</span><br><span class="line">``` 			</span><br><span class="line">&lt;br&gt;</span><br><span class="line">### 二、设置回调 	</span><br><span class="line">&lt;br&gt;</span><br><span class="line">* 当我们点击某个tabBar时，需要用到回调来描述我们点击的究竟是什么，需要有什么样的效果。	 </span><br><span class="line">&lt;br&gt;</span><br><span class="line">* 代理 	</span><br><span class="line">&lt;br&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">@interface JHTabBarViewController : UITabBarController</span><br><span class="line">```	 	</span><br><span class="line">&lt;br&gt; </span><br><span class="line"></span><br><span class="line">```		</span><br><span class="line">@interface JHTabBar : UIView			</span><br><span class="line">``` 			</span><br><span class="line">&lt;br&gt;</span><br><span class="line">### 二、设置回调 	</span><br><span class="line">&lt;br&gt;</span><br><span class="line">* 当我们点击某个tabBar时，需要用到回调来描述我们点击的究竟是什么，需要有什么样的效果。	 </span><br><span class="line">&lt;br&gt;</span><br><span class="line">* 代理 	</span><br><span class="line">&lt;br&gt;</span><br></pre></td></tr></table></figure>
 <p>@class JHTabBar;//2<br>//1、协议<br>@protocol JHTabBarDelegate <nsobject></nsobject></p>
 <p>//3、协议方法</p>
 <ul>
