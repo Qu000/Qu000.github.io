@@ -17,7 +17,7 @@
 <meta property="og:description" content="在实际开发过程中，经常会发现系统自带的UITabBarViewController满足不了项目需求。这时候，就需要自定义一个满足需求的UITabBarViewController了。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5129507-29aa0d282016bf30.gif?imageMogr2/auto-orient/strip">
-<meta property="og:updated_time" content="2018-03-26T09:37:01.941Z">
+<meta property="og:updated_time" content="2018-03-26T09:39:37.301Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="自定义UITabBarController">
 <meta name="twitter:description" content="在实际开发过程中，经常会发现系统自带的UITabBarViewController满足不了项目需求。这时候，就需要自定义一个满足需求的UITabBarViewController了。">
@@ -208,9 +208,23 @@
 <li><p>如： </p>
 </li>
 </ul>
-<pre><code>@interface JHTabBarViewController : UITabBarController
-</code></pre><pre><code>@interface JHTabBar : UIView            
-</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@interface JHTabBarViewController : UITabBarController</span><br><span class="line">```	 	</span><br><span class="line"></span><br><span class="line">```		</span><br><span class="line">@interface JHTabBar : UIView			</span><br><span class="line">``` 	</span><br><span class="line"></span><br><span class="line">### 二、设置回调 	</span><br><span class="line"></span><br><span class="line">* 当我们点击某个tabBar时，需要用到回调来描述我们点击的究竟是什么，需要有什么样的效果。	 </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">* 代理</span><br></pre></td></tr></table></figure>
+<p>@class JHTabBar;//2<br>//1、协议<br>@protocol JHTabBarDelegate <nsobject></nsobject></p>
+<p>//3、协议方法</p>
+<ul>
+<li>(void)tabBar:(JHTabBar *)tabBar clickBtn:(NSUInteger) index;<br>@end</li>
+</ul>
+<p>@interface JHTabBar : UIView</p>
+<p>//4、设置代理<br>@property(nonatomic, weak) id<jhtabbardelegate> delegate;<br>@end<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line"></span><br><span class="line">此时，只是用普通的`index`来代表我们的tabBar，为了使其更具意义，定义成枚举:</span><br></pre></td></tr></table></figure></jhtabbardelegate></p>
+<p>//5、定义枚举<br>typedef NS_ENUM(NSUInteger, JHItemType) {<br>    JHItemTypeMiddle,<br>    JHItemTypeLeft=100,//左边的item[具体意义自定]<br>    JHItemTypeRight<br>};</p>
+<p>//再将index类型换为枚举类型</p>
+<ul>
+<li>(void)tabBar:(JHTabBar *)tabBar clickBtn:(JHItemType) index;<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">	</span><br><span class="line">* block   </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">根据之前的分析可知，参数为JHTabBar类型的`tabBar`与JHItemType类型的`index`。</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>typedef void(^TabBlock)(JHTabBar * tabBar,JHItemType index);</p>
+<p>//7、block修饰使用copy<br>@property (nonatomic, copy)TabBlock block;<br><code>`</code>     </p>
+<h3 id="三、创建item"><a href="#三、创建item" class="headerlink" title="三、创建item"></a>三、创建item</h3>
       
 
       
