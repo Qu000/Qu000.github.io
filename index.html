@@ -172,112 +172,30 @@
     <article id="post-自定义UITabBarController" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/26/自定义UITabBarController/">自定义UITabBarController</a>
+    </h1>
+  
+
+        
+        <a href="/2018/03/26/自定义UITabBarController/" class="archive-article-date">
+  	<time datetime="2018-03-26T08:37:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-26</time>
+</a>
+        
+        
+
+      </header>
+    
     <div class="article-entry" itemprop="articleBody">
       
-        <hr>
-<p>title: 自定义UITabBarController<br>date: 2018-03-26 16:37:25<br>tags:</p>
-<pre><code>- 重修笔记
-- iOS
-- 项目解析
-</code></pre><hr>
-<p><img src="https://upload-images.jianshu.io/upload_images/5129507-29aa0d282016bf30.gif?imageMogr2/auto-orient/strip" alt="tabBar0.gif">        </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">在实际开发过程中，经常会发现系统自带的UITabBarViewController满足不了项目需求。</span><br><span class="line">这时候，就需要自定义一个满足需求的UITabBarViewController了。</span><br><span class="line">```		</span><br><span class="line"></span><br><span class="line">&lt;!-- more --&gt;</span><br><span class="line"></span><br><span class="line">### 一、command + n		</span><br><span class="line"></span><br><span class="line">* 想要自定义UITabBarViewController，需要先创建一个继承于系统UITabBarViewController的类文件。		</span><br><span class="line"></span><br><span class="line">* 通常情况下，我们还需要自定义UITabBarViewController上的那个tabBar`[往往是重点]`，继承于UIView即可。		</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">* 如：</span><br></pre></td></tr></table></figure>
-<p>@interface JHTabBarViewController : UITabBarController<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
-<p>@interface JHTabBar : UIView<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">### 二、设置回调 		</span><br><span class="line"></span><br><span class="line">* 当我们点击某个tabBar时，需要用到回调来描述我们点击的究竟是什么，需要有什么样的效果。		</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">* 代理</span><br></pre></td></tr></table></figure></p>
-<p>@class JHTabBar;//2<br>//1、协议<br>@protocol JHTabBarDelegate <nsobject></nsobject></p>
-<p>//3、协议方法</p>
-<ul>
-<li>(void)tabBar:(JHTabBar *)tabBar clickBtn:(NSUInteger) index;<br>@end</li>
-</ul>
-<p>@interface JHTabBar : UIView</p>
-<p>//4、设置代理<br>@property(nonatomic, weak) id<jhtabbardelegate> delegate;<br>@end<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">此时，只是用普通的`index`来代表我们的tabBar，为了使其更具意义，定义成枚举:</span><br></pre></td></tr></table></figure></jhtabbardelegate></p>
-<p>//5、定义枚举<br>typedef NS_ENUM(NSUInteger, JHItemType) {<br>    JHItemTypeMiddle,<br>    JHItemTypeLeft=100,//左边的item[具体意义自定]<br>    JHItemTypeRight<br>};</p>
-<p>//再将index类型换为枚举类型</p>
-<ul>
-<li>(void)tabBar:(JHTabBar *)tabBar clickBtn:(JHItemType) index;<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">* block 		</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">根据之前的分析可知，参数为JHTabBar类型的`tabBar`与JHItemType类型的`index`。</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>typedef void(^TabBlock)(JHTabBar * tabBar,JHItemType index);</p>
-<p>//7、block修饰使用copy<br>@property (nonatomic, copy)TabBlock block;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 三、创建item		</span><br><span class="line"></span><br><span class="line">先前我们已经定义好了代理和block，接下来设置item。		</span><br><span class="line"></span><br><span class="line">* 先设置item的数据源</span><br></pre></td></tr></table></figure></p>
-<p>/*<em> item数据源 </em>/<br>@property (nonatomic, strong)NSArray * itemsList; </p>
-<p>-(NSArray *)itemsList{<br>    if (!_itemsList) {<br>        _itemsList = @[@”tab_left”,@”tab_right”];<br>    }<br>    return _itemsList;<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* 有了item的数据源，就可以进行item的初始化了`[itemsList里放的是tabBar未被选中时的图片名称]`</span><br></pre></td></tr></table></figure></p>
-<p>//view中、控件初始化<br>-(instancetype)initWithFrame:(CGRect)frame{<br>    self = [super initWithFrame:frame];<br>    if (self) {</p>
-<pre><code>    for (NSInteger i=0; i&lt;self.itemsList.count; i++) {
-        UIButton *item = [UIButton buttonWithType:UIButtonTypeCustom];
-        [item setImage:[UIImage imageNamed:self.itemsList[i]] forState:UIControlStateNormal];
-        [item setImage:[UIImage imageNamed:[self.itemsList[i] stringByAppendingString:@&quot;_p&quot;]] forState:UIControlStateSelected];
-        [item addTarget:self action:@selector(clickItem:) forControlEvents:UIControlEventTouchUpInside];
-        item.tag = JHItemTypeLeft + I;
-       //图片取消高亮
-        item.adjustsImageWhenHighlighted = NO;
-        [self addSubview:item];
-
-    }
-}
-return self;
-</code></pre><p>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">* 计算frame</span><br></pre></td></tr></table></figure></p>
-<p>-(void)layoutSubviews{<br>    [super layoutSubviews];</p>
-<pre><code>CGFloat w = self.bounds.size.width / self.itemsList.count;
-
-for (NSInteger i=0; i&lt; [self subviews].count; i++) {
-    UIView * btn = [self subviews][I];
-    if ([btn isKindOfClass:[UIButton class]]) {
-        btn.frame = CGRectMake((btn.tag - JHItemTypeLeft)*w, 0, w, self.frame.size.height);
-    }
-}
-</code></pre><p>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">* 响应方法</span><br></pre></td></tr></table></figure></p>
-<ul>
-<li><p>(void)clickItem:(UIButton *)button{<br>  //判断代理是否能响应某个方法<br>  if ([self.delegate respondsToSelector:@selector(tabBar:clickBtn:)]) {</p>
-<pre><code>[self.delegate tabBar:self clickBtn:button.tag];
-</code></pre><p>  }</p>
-<p>  //走block<br>  //!self.block?:self.block(self,button.tag)<br>  if (self.block) {</p>
-<pre><code>self.block(self, button.tag);
-</code></pre><p>  }</p>
-</li>
-</ul>
-<p>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 四、创建tabBar		</span><br><span class="line"></span><br><span class="line">tanBar内部的定义先告一段落，现在在JHTabBarViewController里定义一个tabBar		</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">* 导入头文件		</span><br><span class="line">*</span><br></pre></td></tr></table></figure></p>
-<p>#import “JHTabBar.h”<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* 创建自定义的tabBar</span><br></pre></td></tr></table></figure></p>
-<p>@property (nonatomic, strong)JHTabBar * jhTabBar;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">* 设置代理</span><br></pre></td></tr></table></figure></p>
-<p>@interface JHTabBarViewController ()<jhtabbardelegate><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">* 懒加载</span><br></pre></td></tr></table></figure></jhtabbardelegate></p>
-<p>-(JHTabBar *)jhTabBar{<br>    if (!_jhTabBar) {<br>        _jhTabBar = [[JHTabBar alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 49)];<br>        _jhTabBar.delegate = self;<br>    }<br>    return _jhTabBar;<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* 加载控制器</span><br></pre></td></tr></table></figure></p>
-<p>[self setupChildrenViewController];</p>
-<ul>
-<li><p>(void)setupChildrenViewController{<br>  NSMutableArray * childArr = [NSMutableArray arrayWithArray:@[@”leftVC”,@”rightVC”]];<br>  for (NSInteger i=0; i&lt;childArr.count; i++) {</p>
-<pre><code>NSString *vcName = childArr[I];
-
-UIViewController *vc = [[NSClassFromString(vcName) alloc]init];
-
-JHNavigationController * nav = [[JHNavigationController alloc]initWithRootViewController:vc];
-[childArr replaceObjectAtIndex:i withObject:nav];
-</code></pre><p>  }<br>  self.viewControllers = childArr;<br>}</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">* 加载tabBar</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>[self.tabBar addSubview:self.jhTabBar];<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* 实现代理方法</span><br></pre></td></tr></table></figure></p>
-<p>#pragma mark —- 实现JHTabBarDelegate方法<br>-(void)tabBar:(JHTabBar *)tabBar clickBtn:(JHItemType)index{<br>    self.selectedIndex = index - JHItemTypeLeft;<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">### 五、添加lastItem		</span><br><span class="line"></span><br><span class="line">* 在JHTabBar里</span><br></pre></td></tr></table></figure></p>
-<p>/*<em> 上一次点击的item </em>/<br>@property (nonatomic, strong) UIButton * lastItem;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* 在`- (instancetype)initWithFrame:(CGRect)frame NS_DESIGNATED_INITIALIZER;`里</span><br></pre></td></tr></table></figure></p>
-<p>if (i==0) {<br>                item.selected = YES;<br>                self.lastItem = item;<br>            }</p>
-<pre><code>[self addSubview:item];
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* 在响应事件`- (void)clickItem:(UIButton *)button&#123;&#125;`里</span><br></pre></td></tr></table></figure>
-<p>self.lastItem.selected = NO;<br>button.selected = YES;<br>self.lastItem = button;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 六、设置动画 		</span><br><span class="line"></span><br><span class="line">* 在响应事件`- (void)clickItem:(UIButton *)button&#123;&#125;`里</span><br></pre></td></tr></table></figure></p>
-<p>//设置动画<br>    [UIView animateWithDuration:0.2 animations:^{<br>        button.transform = CGAffineTransformMakeScale(1.2, 1.2);//先扩大到1.2</p>
-<pre><code>}completion:^(BOOL finished) {
-    [UIView animateWithDuration:0.2 animations:^{
-        button.transform = CGAffineTransformIdentity;//恢复
-    }];
-}];
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 此时效果图：		</span><br><span class="line"></span><br><span class="line">![tabBar1.gif](https://upload-images.jianshu.io/upload_images/5129507-9b00378db4e9a6c5.gif?imageMogr2/auto-orient/strip)</span><br><span class="line"></span><br><span class="line">### 七、添加中间的特殊item		</span><br><span class="line"></span><br><span class="line">* 在JHTabBar里</span><br></pre></td></tr></table></figure>
-<p>/*<em> 中间的特殊item </em>/<br>@property (nonatomic, strong) UIButton * midButton;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* 懒加载</span><br></pre></td></tr></table></figure></p>
-<p>-(UIButton *)midButton{<br>    if (!_midButton) {<br>        _midButton = [UIButton buttonWithType:UIButtonTypeCustom];<br>        [_midButton setImage:[UIImage imageNamed:@”tab_middle”] forState:UIControlStateNormal];<br>        _midButton.tag = JHItemTypeMiddle;<br>        [_midButton addTarget:self action:@selector(clickItem:) forControlEvents:UIControlEventTouchUpInside];<br>    }<br>    return _midButton;<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* 在`- (instancetype)initWithFrame:(CGRect)frame NS_DESIGNATED_INITIALIZER;`for循环之后</span><br></pre></td></tr></table></figure></p>
-<p>//添加到视图<br>[self addSubview:self.midButton];<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* 在`-(void)layoutSubviews&#123;&#125;`里</span><br></pre></td></tr></table></figure></p>
-<p>[self.midButton sizeToFit];<br>self.midButton.center = CGPointMake(self.bounds.size.width/2, self.bounds.size.height-40);<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">* command+n创建特殊视图		</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">* 在JHTabBarViewController的代理方法里做修改</span><br></pre></td></tr></table></figure></p>
-<p>#pragma mark —- 实现JHTabBarDelegate方法<br>-(void)tabBar:(JHTabBar *)tabBar clickBtn:(JHItemType)index{<br>    //不是特殊视图时<br>    if (index != JHItemTypeMiddle) {<br>        self.selectedIndex = index - JHItemTypeLeft;<br>        return;<br>    }</p>
-<pre><code>//是模态视图
-middleVC * midVc = [[middleVC alloc]init];
-[self presentViewController:midVc animated:YES completion:nil];
-</code></pre><p>}<br><code>`</code>        </p>
-<h3 id="此时效果图："><a href="#此时效果图：" class="headerlink" title="此时效果图："></a>此时效果图：</h3><p><img src="https://upload-images.jianshu.io/upload_images/5129507-215a1acdeb65a8fd.gif?imageMogr2/auto-orient/strip" alt="tabBar2.gif"></p>
-
+        <p><img src="https://upload-images.jianshu.io/upload_images/5129507-29aa0d282016bf30.gif?imageMogr2/auto-orient/strip" alt="tabBar0.gif">        </p>
+<p>在实际开发过程中，经常会发现系统自带的UITabBarViewController满足不了项目需求。<br>这时候，就需要自定义一个满足需求的UITabBarViewController了。</p>
+        
+          <a class="article-more-a" href="/2018/03/26/自定义UITabBarController/#more">more >></a>
+        
       
 
       
@@ -285,6 +203,25 @@ middleVC * midVc = [[middleVC alloc]init];
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">重修笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">项目解析</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -773,6 +710,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">重修笔记</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">项目解析</a>
               </li>
             
             <div class="clearfix"></div>

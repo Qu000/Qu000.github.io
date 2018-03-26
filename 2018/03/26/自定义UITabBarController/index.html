@@ -6,22 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://qu000.github.io">
-  <title>iOS_July的博客</title>
+  <title>自定义UITabBarController | iOS_July的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="title: 自定义UITabBarControllerdate: 2018-03-26 16:37:25tags: - 重修笔记 - iOS - 项目解析           1234567891011121314在实际开发过程中，经常会发现系统自带的UITabBarViewController满足不了项目需求。这时候，就需要自定义一个满足需求的UITabBarViewController了。">
-<meta name="keywords" content="iOS,HTML5,开发者,Coder,视频直播,微信小程序,未毕业">
+  <meta name="description" content="在实际开发过程中，经常会发现系统自带的UITabBarViewController满足不了项目需求。这时候，就需要自定义一个满足需求的UITabBarViewController了。">
+<meta name="keywords" content="iOS,重修笔记,项目解析">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS_July的博客">
+<meta property="og:title" content="自定义UITabBarController">
 <meta property="og:url" content="https://qu000.github.io/2018/03/26/自定义UITabBarController/index.html">
 <meta property="og:site_name" content="iOS_July的博客">
-<meta property="og:description" content="title: 自定义UITabBarControllerdate: 2018-03-26 16:37:25tags: - 重修笔记 - iOS - 项目解析           1234567891011121314在实际开发过程中，经常会发现系统自带的UITabBarViewController满足不了项目需求。这时候，就需要自定义一个满足需求的UITabBarViewController了。">
+<meta property="og:description" content="在实际开发过程中，经常会发现系统自带的UITabBarViewController满足不了项目需求。这时候，就需要自定义一个满足需求的UITabBarViewController了。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5129507-29aa0d282016bf30.gif?imageMogr2/auto-orient/strip">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5129507-215a1acdeb65a8fd.gif?imageMogr2/auto-orient/strip">
-<meta property="og:updated_time" content="2018-03-26T09:03:12.918Z">
+<meta property="og:updated_time" content="2018-03-26T09:10:56.049Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS_July的博客">
-<meta name="twitter:description" content="title: 自定义UITabBarControllerdate: 2018-03-26 16:37:25tags: - 重修笔记 - iOS - 项目解析           1234567891011121314在实际开发过程中，经常会发现系统自带的UITabBarViewController满足不了项目需求。这时候，就需要自定义一个满足需求的UITabBarViewController了。">
+<meta name="twitter:title" content="自定义UITabBarController">
+<meta name="twitter:description" content="在实际开发过程中，经常会发现系统自带的UITabBarViewController满足不了项目需求。这时候，就需要自定义一个满足需求的UITabBarViewController了。">
 <meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/5129507-29aa0d282016bf30.gif?imageMogr2/auto-orient/strip">
   
     <link rel="alternative" href="/atom.xml" title="iOS_July的博客" type="application/atom+xml">
@@ -174,17 +174,42 @@
             <article id="post-自定义UITabBarController" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      自定义UITabBarController
+    </h1>
+  
+
+        
+        <a href="/2018/03/26/自定义UITabBarController/" class="archive-article-date">
+  	<time datetime="2018-03-26T08:37:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-26</time>
+</a>
+        
+        
+        <span class="archive-article-date">
+			    阅读量 <span id="busuanzi_value_page_pv"></span>
+		    </span>
+        
+
+      </header>
+    
     <div class="article-entry" itemprop="articleBody">
       
-        <hr>
-<p>title: 自定义UITabBarController<br>date: 2018-03-26 16:37:25<br>tags:</p>
-<pre><code>- 重修笔记
-- iOS
-- 项目解析
-</code></pre><hr>
-<p><img src="https://upload-images.jianshu.io/upload_images/5129507-29aa0d282016bf30.gif?imageMogr2/auto-orient/strip" alt="tabBar0.gif">        </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">在实际开发过程中，经常会发现系统自带的UITabBarViewController满足不了项目需求。</span><br><span class="line">这时候，就需要自定义一个满足需求的UITabBarViewController了。</span><br><span class="line">```		</span><br><span class="line"></span><br><span class="line">&lt;!-- more --&gt;</span><br><span class="line"></span><br><span class="line">### 一、command + n		</span><br><span class="line"></span><br><span class="line">* 想要自定义UITabBarViewController，需要先创建一个继承于系统UITabBarViewController的类文件。		</span><br><span class="line"></span><br><span class="line">* 通常情况下，我们还需要自定义UITabBarViewController上的那个tabBar`[往往是重点]`，继承于UIView即可。		</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">* 如：</span><br></pre></td></tr></table></figure>
-<p>@interface JHTabBarViewController : UITabBarController<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+        <p><img src="https://upload-images.jianshu.io/upload_images/5129507-29aa0d282016bf30.gif?imageMogr2/auto-orient/strip" alt="tabBar0.gif">        </p>
+<p>在实际开发过程中，经常会发现系统自带的UITabBarViewController满足不了项目需求。<br>这时候，就需要自定义一个满足需求的UITabBarViewController了。</p>
+<a id="more"></a>
+<h3 id="一、command-n"><a href="#一、command-n" class="headerlink" title="一、command + n"></a>一、command + n</h3><ul>
+<li><p>想要自定义UITabBarViewController，需要先创建一个继承于系统UITabBarViewController的类文件。        </p>
+</li>
+<li><p>通常情况下，我们还需要自定义UITabBarViewController上的那个tabBar<code>[往往是重点]</code>，继承于UIView即可。        </p>
+</li>
+</ul>
+<ul>
+<li>如：        </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@interface JHTabBarViewController : UITabBarController</span><br><span class="line">```</span><br></pre></td></tr></table></figure>
 <p>@interface JHTabBar : UIView<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">### 二、设置回调 		</span><br><span class="line"></span><br><span class="line">* 当我们点击某个tabBar时，需要用到回调来描述我们点击的究竟是什么，需要有什么样的效果。		</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">* 代理</span><br></pre></td></tr></table></figure></p>
 <p>@class JHTabBar;//2<br>//1、协议<br>@protocol JHTabBarDelegate <nsobject></nsobject></p>
 <p>//3、协议方法</p>
@@ -313,6 +338,25 @@ middleVC * midVc = [[middleVC alloc]init];
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">重修笔记</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">项目解析</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -543,6 +587,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">重修笔记</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">项目解析</a>
               </li>
             
             <div class="clearfix"></div>
