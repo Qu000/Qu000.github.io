@@ -17,7 +17,7 @@
 <meta property="og:description" content="在实际开发过程中，经常会发现系统自带的UITabBarViewController满足不了项目需求。这时候，就需要自定义一个满足需求的UITabBarViewController了。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5129507-29aa0d282016bf30.gif?imageMogr2/auto-orient/strip">
-<meta property="og:updated_time" content="2018-03-26T09:59:05.013Z">
+<meta property="og:updated_time" content="2018-03-26T10:01:05.620Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="自定义UITabBarController">
 <meta name="twitter:description" content="在实际开发过程中，经常会发现系统自带的UITabBarViewController满足不了项目需求。这时候，就需要自定义一个满足需求的UITabBarViewController了。">
@@ -269,6 +269,30 @@ typedef void(^TabBlock)(JHTabBar * tabBar,JHItemType index);
         _itemsList = @[@&quot;tab_left&quot;,@&quot;tab_right&quot;];
     }
     return _itemsList;
+}     
+
+</code></pre><ul>
+<li>有了item的数据源，就可以进行item的初始化了<code>[itemsList里放的是tabBar未被选中时的图片名称]</code>     </li>
+</ul>
+<pre><code>
+//view中、控件初始化
+-(instancetype)initWithFrame:(CGRect)frame{
+    self = [super initWithFrame:frame];
+    if (self) {
+
+        for (NSInteger i=0; i&lt;self.itemsList.count; i++) {
+            UIButton *item = [UIButton buttonWithType:UIButtonTypeCustom];
+            [item setImage:[UIImage imageNamed:self.itemsList[i]] forState:UIControlStateNormal];
+            [item setImage:[UIImage imageNamed:[self.itemsList[i] stringByAppendingString:@&quot;_p&quot;]] forState:UIControlStateSelected];
+            [item addTarget:self action:@selector(clickItem:) forControlEvents:UIControlEventTouchUpInside];
+            item.tag = JHItemTypeLeft + I;
+           //图片取消高亮
+            item.adjustsImageWhenHighlighted = NO;
+            [self addSubview:item];
+
+        }
+    }
+    return self;
 }     
 
 </code></pre>
