@@ -18,7 +18,8 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5129507-29aa0d282016bf30.gif?imageMogr2/auto-orient/strip">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5129507-9b00378db4e9a6c5.gif?imageMogr2/auto-orient/strip">
-<meta property="og:updated_time" content="2018-03-26T10:09:30.996Z">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5129507-215a1acdeb65a8fd.gif?imageMogr2/auto-orient/strip">
+<meta property="og:updated_time" content="2018-03-26T10:12:06.602Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="自定义UITabBarController">
 <meta name="twitter:description" content="在实际开发过程中，经常会发现系统自带的UITabBarViewController满足不了项目需求。这时候，就需要自定义一个满足需求的UITabBarViewController了。">
@@ -438,6 +439,63 @@ self.lastItem = button;
     }];     
 
 </code></pre><h3 id="此时效果图："><a href="#此时效果图：" class="headerlink" title="此时效果图："></a>此时效果图：</h3><p><img src="https://upload-images.jianshu.io/upload_images/5129507-9b00378db4e9a6c5.gif?imageMogr2/auto-orient/strip" alt="tabBar1.gif">     </p>
+<h3 id="七、添加中间的特殊item"><a href="#七、添加中间的特殊item" class="headerlink" title="七、添加中间的特殊item"></a>七、添加中间的特殊item</h3><ul>
+<li>在JHTabBar里     </li>
+</ul>
+<pre><code>
+/** 中间的特殊item */
+@property (nonatomic, strong) UIButton * midButton;     
+
+</code></pre><ul>
+<li>懒加载     </li>
+</ul>
+<pre><code>
+-(UIButton *)midButton{
+    if (!_midButton) {
+        _midButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_midButton setImage:[UIImage imageNamed:@&quot;tab_middle&quot;] forState:UIControlStateNormal];
+        _midButton.tag = JHItemTypeMiddle;
+        [_midButton addTarget:self action:@selector(clickItem:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _midButton;
+}     
+
+</code></pre><ul>
+<li>在<code>- (instancetype)initWithFrame:(CGRect)frame NS_DESIGNATED_INITIALIZER;</code>for循环之后     </li>
+</ul>
+<pre><code>
+//添加到视图
+[self addSubview:self.midButton];     
+
+</code></pre><ul>
+<li>在<code>-(void)layoutSubviews{}</code>里     </li>
+</ul>
+<pre><code>
+[self.midButton sizeToFit];
+self.midButton.center = CGPointMake(self.bounds.size.width/2, self.bounds.size.height-40);     
+
+</code></pre><ul>
+<li>command+n创建特殊视图     </li>
+</ul>
+<ul>
+<li>在JHTabBarViewController的代理方法里做修改     </li>
+</ul>
+<pre><code>
+#pragma mark ---- 实现JHTabBarDelegate方法
+-(void)tabBar:(JHTabBar *)tabBar clickBtn:(JHItemType)index{
+    //不是特殊视图时
+    if (index != JHItemTypeMiddle) {
+        self.selectedIndex = index - JHItemTypeLeft;
+        return;
+    }
+
+    //是模态视图
+    middleVC * midVc = [[middleVC alloc]init];
+    [self presentViewController:midVc animated:YES completion:nil];
+
+}     
+
+</code></pre><h3 id="此时效果图：-1"><a href="#此时效果图：-1" class="headerlink" title="此时效果图："></a>此时效果图：</h3><p><img src="https://upload-images.jianshu.io/upload_images/5129507-215a1acdeb65a8fd.gif?imageMogr2/auto-orient/strip" alt="tabBar2.gif">     </p>
 
       
 
