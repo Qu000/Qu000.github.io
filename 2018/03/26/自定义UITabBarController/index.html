@@ -17,7 +17,7 @@
 <meta property="og:description" content="在实际开发过程中，经常会发现系统自带的UITabBarViewController满足不了项目需求。这时候，就需要自定义一个满足需求的UITabBarViewController了。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5129507-29aa0d282016bf30.gif?imageMogr2/auto-orient/strip">
-<meta property="og:updated_time" content="2018-03-26T09:57:00.106Z">
+<meta property="og:updated_time" content="2018-03-26T09:59:05.013Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="自定义UITabBarController">
 <meta name="twitter:description" content="在实际开发过程中，经常会发现系统自带的UITabBarViewController满足不了项目需求。这时候，就需要自定义一个满足需求的UITabBarViewController了。">
@@ -255,6 +255,21 @@ typedef void(^TabBlock)(JHTabBar * tabBar,JHItemType index);
 
 //7、block修饰使用copy
 @property (nonatomic, copy)TabBlock block;    
+
+</code></pre><h3 id="三、创建item"><a href="#三、创建item" class="headerlink" title="三、创建item"></a>三、创建item</h3><p>先前我们已经定义好了代理和block，接下来设置item。 </p>
+<ul>
+<li>先设置item的数据源     </li>
+</ul>
+<pre><code>
+/** item数据源 */
+@property (nonatomic, strong)NSArray * itemsList; 
+
+-(NSArray *)itemsList{
+    if (!_itemsList) {
+        _itemsList = @[@&quot;tab_left&quot;,@&quot;tab_right&quot;];
+    }
+    return _itemsList;
+}     
 
 </code></pre>
       
