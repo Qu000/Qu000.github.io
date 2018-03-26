@@ -17,7 +17,7 @@
 <meta property="og:description" content="在实际开发过程中，经常会发现系统自带的UITabBarViewController满足不了项目需求。这时候，就需要自定义一个满足需求的UITabBarViewController了。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5129507-29aa0d282016bf30.gif?imageMogr2/auto-orient/strip">
-<meta property="og:updated_time" content="2018-03-26T09:52:41.405Z">
+<meta property="og:updated_time" content="2018-03-26T09:54:41.836Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="自定义UITabBarController">
 <meta name="twitter:description" content="在实际开发过程中，经常会发现系统自带的UITabBarViewController满足不了项目需求。这时候，就需要自定义一个满足需求的UITabBarViewController了。">
@@ -231,6 +231,19 @@
 //4、设置代理
 @property(nonatomic, weak) id&lt;JHTabBarDelegate&gt; delegate;
 @end         
+
+</code></pre><p>此时，只是用普通的<code>index</code>来代表我们的tabBar，为了使其更具意义，定义成枚举:      </p>
+<pre><code>
+//5、定义枚举
+typedef NS_ENUM(NSUInteger, JHItemType) {
+    JHItemTypeMiddle,
+    JHItemTypeLeft=100,//左边的item[具体意义自定]
+    JHItemTypeRight
+};
+
+//再将index类型换为枚举类型
+- (void)tabBar:(JHTabBar *)tabBar clickBtn:(JHItemType) index;        
+
 
 </code></pre>
       
