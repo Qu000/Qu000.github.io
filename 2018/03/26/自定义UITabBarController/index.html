@@ -17,7 +17,7 @@
 <meta property="og:description" content="在实际开发过程中，经常会发现系统自带的UITabBarViewController满足不了项目需求。这时候，就需要自定义一个满足需求的UITabBarViewController了。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5129507-29aa0d282016bf30.gif?imageMogr2/auto-orient/strip">
-<meta property="og:updated_time" content="2018-03-26T10:03:11.229Z">
+<meta property="og:updated_time" content="2018-03-26T10:06:30.430Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="自定义UITabBarController">
 <meta name="twitter:description" content="在实际开发过程中，经常会发现系统自带的UITabBarViewController满足不了项目需求。这时候，就需要自定义一个满足需求的UITabBarViewController了。">
@@ -328,6 +328,72 @@ typedef void(^TabBlock)(JHTabBar * tabBar,JHItemType index);
         self.block(self, button.tag);
     }
 
+}     
+
+</code></pre><h3 id="四、创建tabBar"><a href="#四、创建tabBar" class="headerlink" title="四、创建tabBar"></a>四、创建tabBar</h3><p>tanBar内部的定义先告一段落，现在在JHTabBarViewController里定义一个tabBar     </p>
+<ul>
+<li>导入头文件     </li>
+</ul>
+<pre><code>
+#import &quot;JHTabBar.h&quot;     
+
+</code></pre><ul>
+<li>创建自定义的tabBar     </li>
+</ul>
+<pre><code>
+@property (nonatomic, strong)JHTabBar * jhTabBar;     
+
+</code></pre><ul>
+<li>设置代理     </li>
+</ul>
+<pre><code>
+@interface JHTabBarViewController ()&lt;JHTabBarDelegate&gt;     
+
+</code></pre><ul>
+<li>懒加载     </li>
+</ul>
+<pre><code>
+-(JHTabBar *)jhTabBar{
+    if (!_jhTabBar) {
+        _jhTabBar = [[JHTabBar alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 49)];
+        _jhTabBar.delegate = self;
+    }
+    return _jhTabBar;
+}     
+
+</code></pre><ul>
+<li>加载控制器     </li>
+</ul>
+<pre><code>
+[self setupChildrenViewController];
+
+- (void)setupChildrenViewController{
+    NSMutableArray * childArr = [NSMutableArray arrayWithArray:@[@&quot;leftVC&quot;,@&quot;rightVC&quot;]];
+    for (NSInteger i=0; i&lt;childArr.count; i++) {
+        NSString *vcName = childArr[I];
+
+        UIViewController *vc = [[NSClassFromString(vcName) alloc]init];
+
+        JHNavigationController * nav = [[JHNavigationController alloc]initWithRootViewController:vc];
+        [childArr replaceObjectAtIndex:i withObject:nav];
+
+    }
+    self.viewControllers = childArr;
+}     
+
+</code></pre><ul>
+<li>加载tabBar     </li>
+</ul>
+<pre><code>
+[self.tabBar addSubview:self.jhTabBar];     
+
+</code></pre><ul>
+<li>实现代理方法     </li>
+</ul>
+<pre><code>
+#pragma mark ---- 实现JHTabBarDelegate方法
+-(void)tabBar:(JHTabBar *)tabBar clickBtn:(JHItemType)index{
+    self.selectedIndex = index - JHItemTypeLeft;
 }     
 
 </code></pre>
