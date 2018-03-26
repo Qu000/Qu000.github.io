@@ -17,7 +17,7 @@
 <meta property="og:description" content="在实际开发过程中，经常会发现系统自带的UITabBarViewController满足不了项目需求。这时候，就需要自定义一个满足需求的UITabBarViewController了。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5129507-29aa0d282016bf30.gif?imageMogr2/auto-orient/strip">
-<meta property="og:updated_time" content="2018-03-26T10:01:05.620Z">
+<meta property="og:updated_time" content="2018-03-26T10:02:28.684Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="自定义UITabBarController">
 <meta name="twitter:description" content="在实际开发过程中，经常会发现系统自带的UITabBarViewController满足不了项目需求。这时候，就需要自定义一个满足需求的UITabBarViewController了。">
@@ -293,6 +293,23 @@ typedef void(^TabBlock)(JHTabBar * tabBar,JHItemType index);
         }
     }
     return self;
+}     
+
+</code></pre><ul>
+<li>计算frame     </li>
+</ul>
+<pre><code>
+-(void)layoutSubviews{
+    [super layoutSubviews];
+
+    CGFloat w = self.bounds.size.width / self.itemsList.count;
+
+    for (NSInteger i=0; i&lt; [self subviews].count; i++) {
+        UIView * btn = [self subviews][I];
+        if ([btn isKindOfClass:[UIButton class]]) {
+            btn.frame = CGRectMake((btn.tag - JHItemTypeLeft)*w, 0, w, self.frame.size.height);
+        }
+    }
 }     
 
 </code></pre>
