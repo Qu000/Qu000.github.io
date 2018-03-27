@@ -9,7 +9,7 @@
   <title>自定义UINavigation+UIScrollView联动 | iOS_July的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="上一章讲解了自定义tabBar，本章讲解怎样简单的自定义UINavigationController以及UIScrollView滑动页面的联动。">
-<meta name="keywords" content="重修笔记,iOS,项目解析">
+<meta name="keywords" content="iOS,重修笔记,项目解析">
 <meta property="og:type" content="article">
 <meta property="og:title" content="自定义UINavigation+UIScrollView联动">
 <meta property="og:url" content="https://qu000.github.io/2018/03/27/自定义UINavigation-UIScrollView联动/index.html">
@@ -19,8 +19,9 @@
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5129507-4f48020503635a53.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5129507-1672a542b7b0eed1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5129507-378c1050d5b66ce4.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5129507-da0f85d6289b7132.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5129507-7a13beb0af04cb43.gif?imageMogr2/auto-orient/strip">
-<meta property="og:updated_time" content="2018-03-27T08:07:40.582Z">
+<meta property="og:updated_time" content="2018-03-27T08:11:32.967Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="自定义UINavigation+UIScrollView联动">
 <meta name="twitter:description" content="上一章讲解了自定义tabBar，本章讲解怎样简单的自定义UINavigationController以及UIScrollView滑动页面的联动。">
@@ -203,9 +204,9 @@
 <a id="more"></a>     
 <h3 id="一、设置导航栏背景颜色"><a href="#一、设置导航栏背景颜色" class="headerlink" title="一、设置导航栏背景颜色"></a>一、设置导航栏背景颜色</h3><blockquote>
 <p>确保当前控制器已拥有导航栏   </p>
+</blockquote>
 <pre><code>self.navigationController.navigationBar.barTintColor = JHRGB(76, 201, 245);   
-</code></pre></blockquote>
-<h3 id="二、设置左右item"><a href="#二、设置左右item" class="headerlink" title="二、设置左右item"></a>二、设置左右item</h3><pre><code>self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@&quot;global_search&quot;] style:UIBarButtonItemStyleDone target:nil action:nil];   
+</code></pre><h3 id="二、设置左右item"><a href="#二、设置左右item" class="headerlink" title="二、设置左右item"></a>二、设置左右item</h3><pre><code>self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@&quot;global_search&quot;] style:UIBarButtonItemStyleDone target:nil action:nil];   
 
 self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@&quot;title_button_more&quot;] style:UIBarButtonItemStyleDone target:nil action:nil];   
 </code></pre><h6 id="此时效果图"><a href="#此时效果图" class="headerlink" title="此时效果图"></a>此时效果图</h6><p><img src="https://upload-images.jianshu.io/upload_images/5129507-4f48020503635a53.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="nav0.png">   </p>
@@ -214,76 +215,79 @@ self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[
 <h3 id="三、创建ScrollView"><a href="#三、创建ScrollView" class="headerlink" title="三、创建ScrollView"></a>三、创建ScrollView</h3><pre><code>//这里为了方便我是直接用的storyboard
 @property (weak, nonatomic) IBOutlet UIScrollView *contentScrollView;   
 </code></pre><ul>
-<li><p>引入子控制器   </p>
+<li>引入子控制器   </li>
+</ul>
 <pre><code>NSArray * vcName = @[@&quot;JHLeftVC&quot;,@&quot;JHMiddleVC&quot;,@&quot;JHRightVC&quot;];
-  for (NSInteger i=0; i&lt;vcName.count; i++) {
+    for (NSInteger i=0; i&lt;vcName.count; i++) {
 
-      NSString *vcNameStr = vcName[I];
+        NSString *vcNameStr = vcName[I];
 
-      UIViewController * vc = [[NSClassFromString(vcNameStr) alloc]init];
-      vc.title = self.dataList[I];
-      [self addChildViewController:vc];
-  }   
-</code></pre></li>
-<li><p>设置contentScrollView   </p>
+        UIViewController * vc = [[NSClassFromString(vcNameStr) alloc]init];
+        vc.title = self.dataList[I];
+        [self addChildViewController:vc];
+    }   
+</code></pre><ul>
+<li>设置contentScrollView   </li>
+</ul>
 <pre><code>//设置scrollView的contentSize
-  self.contentScrollView.contentSize = CGSizeMake(SCREEN_WIDTH * self.dataList.count, 0);
+   self.contentScrollView.contentSize = CGSizeMake(SCREEN_WIDTH * self.dataList.count, 0);
 
-  self.contentScrollView.delegate = self;
-  self.contentScrollView.pagingEnabled = YES;
-  //默认先展示第二个界面
-  self.contentScrollView.contentOffset = CGPointMake(SCREEN_WIDTH, 0);
+   self.contentScrollView.delegate = self;
+   self.contentScrollView.pagingEnabled = YES;
+   //默认先展示第二个界面
+   self.contentScrollView.contentOffset = CGPointMake(SCREEN_WIDTH, 0);
 
-  //进入主控制器时加载页面
-  [self scrollViewDidEndScrollingAnimation:self.contentScrollView];   
-</code></pre></li>
-<li><p>设置代理方法   </p>
+   //进入主控制器时加载页面
+   [self scrollViewDidEndScrollingAnimation:self.contentScrollView];   
+</code></pre><ul>
+<li>设置代理方法   </li>
+</ul>
 <pre><code>#pragma mark --- UIScrollViewDelegate
 //减速结束时调用。加载子控制器view
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-  CGFloat width = SCREEN_WIDTH;
-  CGFloat height = SCREEN_HEIGHT;
-  CGFloat offset = scrollView.contentOffset.x;
+    CGFloat width = SCREEN_WIDTH;
+    CGFloat height = SCREEN_HEIGHT;
+    CGFloat offset = scrollView.contentOffset.x;
 
-  //获取第几个  的索引值
-  NSInteger idx = offset / width;
+    //获取第几个  的索引值
+    NSInteger idx = offset / width;
 
-  //根据索引值，返回vc的引用
-  UIViewController * vc = self.childViewControllers[idx];
+    //根据索引值，返回vc的引用
+    UIViewController * vc = self.childViewControllers[idx];
 
-  //判读当前vc是否执行过viewDidLoad
-  if ([vc isViewLoaded]) return;
+    //判读当前vc是否执行过viewDidLoad
+    if ([vc isViewLoaded]) return;
 
-  //设置子控制器view的大小
-  vc.view.frame = CGRectMake(offset, 0, width, height);
+    //设置子控制器view的大小
+    vc.view.frame = CGRectMake(offset, 0, width, height);
 
-  //将子控制器view加入到scrollView上
-  [scrollView addSubview:vc.view];
+    //将子控制器view加入到scrollView上
+    [scrollView addSubview:vc.view];
 }   
-</code></pre></li>
-</ul>
-<h6 id="此时的效果图"><a href="#此时的效果图" class="headerlink" title="此时的效果图"></a>此时的效果图</h6><p><img src="https://upload-images.jianshu.io/upload_images/5129507-378c1050d5b66ce4.gif?imageMogr2/auto-orient/strip" alt="scrollView0.gif">   </p>
+</code></pre><h6 id="此时的效果图"><a href="#此时的效果图" class="headerlink" title="此时的效果图"></a>此时的效果图</h6><p><img src="https://upload-images.jianshu.io/upload_images/5129507-378c1050d5b66ce4.gif?imageMogr2/auto-orient/strip" alt="scrollView0.gif">   </p>
 <h3 id="四、自定义topView-navigationItem-titleView"><a href="#四、自定义topView-navigationItem-titleView" class="headerlink" title="四、自定义topView[navigationItem.titleView]"></a>四、自定义topView<code>[navigationItem.titleView]</code></h3><ul>
 <li><p>创建topView替换navigationItem.titleView   </p>
 </li>
 <li><p>定义方法<code>-(instancetype)initWithFrame:(CGRect)frame titleNames:(NSArray *)titles;</code>   </p>
 </li>
 <li><p>定义属性   </p>
+</li>
+</ul>
 <pre><code>/** topView的按钮 */
 @property (nonatomic, strong) NSMutableArray * buttons;
 /** topView按钮下的线条 */
 @property (nonatomic, strong)UIView *lineView;   
-</code></pre></li>
-<li><p>懒加载buttons   </p>
+</code></pre><ul>
+<li>懒加载buttons   </li>
+</ul>
 <pre><code>-(NSArray *)buttons{
-  if (!_buttons) {
-      _buttons = [NSMutableArray array];
-  }
-  return _buttons;
+    if (!_buttons) {
+        _buttons = [NSMutableArray array];
+    }
+    return _buttons;
 }   
-</code></pre></li>
-<li><p>实现方法   </p>
-</li>
+</code></pre><ul>
+<li>实现方法   </li>
 </ul>
 <pre><code>-(instancetype)initWithFrame:(CGRect)frame titleNames:(NSArray *)titles{
     self = [super initWithFrame:frame];
@@ -322,69 +326,95 @@ self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[
 }   
 
 </code></pre><ul>
-<li>在之前的VC中导入头文件<code>[这个类里我使用了YYKit]</code>   <pre><code>#import &quot;JHTopView.h&quot;   
-</code></pre></li>
-<li>创建topView属性<br><code>`</code><br>@property (nonatomic, strong) JHTopView * topView;   </li>
+<li>在之前的VC中导入头文件<code>[这个类里我使用了YYKit]</code>   </li>
 </ul>
-<p>-(JHTopView *)topView{<br>    if (!_topView) {<br>        _topView = [[JHTopView alloc]initWithFrame:CGRectMake(0, 0, 200, 50) titleNames:self.dataList];<br>        };<br>    }<br>    return _topView;<br>}   </p>
-<pre><code>* 替换navigationItem.titleView   
-</code></pre><p>self.navigationItem.titleView = self.topView;   </p>
-<pre><code>###### 此时效果图   
-![topView1.png](https://upload-images.jianshu.io/upload_images/5129507-da0f85d6289b7132.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)   
+<pre><code>#import &quot;JHTopView.h&quot;   
+</code></pre><ul>
+<li>创建topView属性   </li>
+</ul>
+<pre><code>@property (nonatomic, strong) JHTopView * topView;   
 
-### 五、设置lineView   
-
-</code></pre><p>if (i == 1) {<br>                CGFloat h = 2;<br>                CGFloat y = 40;</p>
-<pre><code>    [button.titleLabel sizeToFit];
-
-    self.lineView = [[UIView alloc]init];
-    self.lineView.backgroundColor = [UIColor whiteColor];
-    self.lineView.height = h;
-    self.lineView.width = button.titleLabel.width;
-    self.lineView.top = y;
-    self.lineView.centerX = button.centerX;
-    [self addSubview:self.lineView];
+-(JHTopView *)topView{
+    if (!_topView) {
+        _topView = [[JHTopView alloc]initWithFrame:CGRectMake(0, 0, 200, 50) titleNames:self.dataList];
+        };
+    }
+    return _topView;
 }   
-</code></pre><pre><code>
-### 六、lineView与button的联动   
+</code></pre><ul>
+<li>替换navigationItem.titleView   </li>
+</ul>
+<pre><code>self.navigationItem.titleView = self.topView;   
+</code></pre><h6 id="此时效果图-2"><a href="#此时效果图-2" class="headerlink" title="此时效果图"></a>此时效果图</h6><p><img src="https://upload-images.jianshu.io/upload_images/5129507-da0f85d6289b7132.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="topView1.png">   </p>
+<h3 id="五、设置lineView"><a href="#五、设置lineView" class="headerlink" title="五、设置lineView"></a>五、设置lineView</h3><pre><code>if (i == 1) {
+                CGFloat h = 2;
+                CGFloat y = 40;
 
-* 设置block与滑动方法   
+                [button.titleLabel sizeToFit];
 
-</code></pre><p>typedef void(^TopBlock)(NSInteger tag);   </p>
-<p>@property ( nonatomic, copy) TopBlock block;</p>
-<p>-(void)scrolling:(NSInteger)idx;   </p>
-<pre><code>
-* button的事件   
+                self.lineView = [[UIView alloc]init];
+                self.lineView.backgroundColor = [UIColor whiteColor];
+                self.lineView.height = h;
+                self.lineView.width = button.titleLabel.width;
+                self.lineView.top = y;
+                self.lineView.centerX = button.centerX;
+                [self addSubview:self.lineView];
+            }   
+</code></pre><h3 id="六、lineView与button的联动"><a href="#六、lineView与button的联动" class="headerlink" title="六、lineView与button的联动"></a>六、lineView与button的联动</h3><ul>
+<li>设置block与滑动方法   </li>
+</ul>
+<pre><code>typedef void(^TopBlock)(NSInteger tag);   
 
-</code></pre><p>//topView的button点击事件<br>-(void)clickTitle:(UIButton *)button{</p>
-<pre><code>self.lineView.centerX = button.centerX;
-</code></pre><p>} </p>
-<pre><code>
-### 七、topView与scrollView的联动 
 
-* 修改button点击事件   
-</code></pre><p>//topView的button点击事件<br>-(void)clickTitle:(UIButton *)button{</p>
-<pre><code>self.block(button.tag);
+@property ( nonatomic, copy) TopBlock block;
 
-//点击按钮，使ScrollView滑动到相应位置(展示相应的子视图控制器)
-[self scrolling:button.tag];
-</code></pre><p>}</p>
-<p>//VC滚动时调用<br>-(void)scrolling:(NSInteger)idx{</p>
-<pre><code>UIButton * button = self.buttons[idx];
+-(void)scrolling:(NSInteger)idx;   
 
-//点击按钮，使line滑动到相应位置
-[UIView animateWithDuration:0.2 animations:^{
+</code></pre><ul>
+<li>button的事件   </li>
+</ul>
+<pre><code>//topView的button点击事件
+-(void)clickTitle:(UIButton *)button{
+
     self.lineView.centerX = button.centerX;
-}];
-</code></pre><p>}   </p>
-<pre><code>
-* 修改topView的懒加载   
-</code></pre><p>@weakify(self);<br>        _topView.block = ^(NSInteger tag) {<br>            @strongify(self);<br>            CGPoint point = CGPointMake(tag * SCREEN_WIDTH, self.contentScrollView.contentOffset.y);<br>            [self.contentScrollView setContentOffset:point animated:YES];</p>
-<pre><code>};   
-</code></pre><pre><code>
-* 传递联动索引值给topView   
-</code></pre><p>[self.topView scrolling:idx];<br><code>`</code>   </p>
-<h6 id="最终效果图"><a href="#最终效果图" class="headerlink" title="最终效果图"></a>最终效果图</h6><p><img src="https://upload-images.jianshu.io/upload_images/5129507-7a13beb0af04cb43.gif?imageMogr2/auto-orient/strip" alt="finish0.gif"></p>
+} 
+</code></pre><h3 id="七、topView与scrollView的联动"><a href="#七、topView与scrollView的联动" class="headerlink" title="七、topView与scrollView的联动"></a>七、topView与scrollView的联动</h3><ul>
+<li>修改button点击事件   </li>
+</ul>
+<pre><code>//topView的button点击事件
+-(void)clickTitle:(UIButton *)button{
+
+    self.block(button.tag);
+
+    //点击按钮，使ScrollView滑动到相应位置(展示相应的子视图控制器)
+    [self scrolling:button.tag];
+}
+
+//VC滚动时调用
+-(void)scrolling:(NSInteger)idx{
+
+    UIButton * button = self.buttons[idx];
+
+    //点击按钮，使line滑动到相应位置
+    [UIView animateWithDuration:0.2 animations:^{
+        self.lineView.centerX = button.centerX;
+    }];
+}   
+</code></pre><ul>
+<li>修改topView的懒加载   </li>
+</ul>
+<pre><code>@weakify(self);
+        _topView.block = ^(NSInteger tag) {
+            @strongify(self);
+            CGPoint point = CGPointMake(tag * SCREEN_WIDTH, self.contentScrollView.contentOffset.y);
+            [self.contentScrollView setContentOffset:point animated:YES];
+
+        };   
+</code></pre><ul>
+<li>传递联动索引值给topView   </li>
+</ul>
+<pre><code>[self.topView scrolling:idx];   
+</code></pre><h6 id="最终效果图"><a href="#最终效果图" class="headerlink" title="最终效果图"></a>最终效果图</h6><p><img src="https://upload-images.jianshu.io/upload_images/5129507-7a13beb0af04cb43.gif?imageMogr2/auto-orient/strip" alt="finish0.gif"></p>
 <h3 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h3><p>UINavigationController的常用属性及方法—-&gt;<a href="https://www.jianshu.com/p/31987cdc1b04" target="_blank" rel="noopener">传送门</a></p>
 
       
@@ -425,11 +455,11 @@ self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">重修笔记</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">重修笔记</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -660,7 +690,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">重修笔记</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -668,11 +698,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">项目解析</a>
+                <a href="javascript:void(0)" class="js-tag color5">重修笔记</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color5">项目解析</a>
               </li>
             
             <div class="clearfix"></div>
