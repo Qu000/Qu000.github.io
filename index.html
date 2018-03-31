@@ -191,7 +191,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>把图形数据从RAM传递到VRAM<code>[显存]</code>中，那图形数据是什么呢？其实是所有渲染所需的数。可能包含文字、几何图形。如果是在3D建模的情况下，则还有可能包含一些复杂的数据模型。     </p>
+        <h4 id="一、CPU与GPU交互"><a href="#一、CPU与GPU交互" class="headerlink" title="一、CPU与GPU交互"></a>一、CPU与GPU交互</h4><p>任何程序在运行时生成的数据会先存放在堆内存里，然后再依据具体情况往其他地方存放。我们要调用图形框架生成好的图形数据，也要先放在内存中，从硬件角度来看存放在RAM中，然后CPU不去直接计算渲染它，因为有一个更独立、强大的计算单元GPU来完成这件事。CPU运行APP过程中生成的<br>图形数据是要向GPU发送并且渲染的。     </p>
+<p>而在GPU中有一个内存单元专门用来存放图形数据，叫VRAM，也叫显存。从CPU发送过来的数据先存放在VRAM中，然后再由GPU独立计算并配合CPU完成渲染工作。     </p>
         
           <a class="article-more-a" href="/2018/03/31/绘制图形及理解感悟/#more">more >></a>
         
@@ -883,11 +884,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">ARKit</a>
+                <a href="javascript:void(0)" class="js-tag color5">重修笔记</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">重修笔记</a>
+                <a href="javascript:void(0)" class="js-tag color1">ARKit</a>
               </li>
              
               <li class="article-tag-list-item">
