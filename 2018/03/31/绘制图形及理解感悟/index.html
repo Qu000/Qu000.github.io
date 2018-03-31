@@ -16,10 +16,12 @@
 <meta property="og:site_name" content="iOS_July的博客">
 <meta property="og:description" content="一、CPU与GPU交互任何程序在运行时生成的数据会先存放在堆内存里，然后再依据具体情况往其他地方存放。我们要调用图形框架生成好的图形数据，也要先放在内存中，从硬件角度来看存放在RAM中，然后CPU不去直接计算渲染它，因为有一个更独立、强大的计算单元GPU来完成这件事。CPU运行APP过程中生成的图形数据是要向GPU发送并且渲染的。      而在GPU中有一个内存单元专门用来存放图形数据，叫VRA">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-03-31T12:28:46.428Z">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5129507-b6c5f95b6f6851ed.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-03-31T13:09:50.329Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="绘制图形及理解感悟">
 <meta name="twitter:description" content="一、CPU与GPU交互任何程序在运行时生成的数据会先存放在堆内存里，然后再依据具体情况往其他地方存放。我们要调用图形框架生成好的图形数据，也要先放在内存中，从硬件角度来看存放在RAM中，然后CPU不去直接计算渲染它，因为有一个更独立、强大的计算单元GPU来完成这件事。CPU运行APP过程中生成的图形数据是要向GPU发送并且渲染的。      而在GPU中有一个内存单元专门用来存放图形数据，叫VRA">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/5129507-b6c5f95b6f6851ed.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
   
     <link rel="alternative" href="/atom.xml" title="iOS_July的博客" type="application/atom+xml">
   
@@ -199,7 +201,42 @@
 <a id="more"></a>      
 <h4 id="二、状态准备"><a href="#二、状态准备" class="headerlink" title="二、状态准备"></a>二、状态准备</h4><p>把图形数据从RAM传递到VRAM<code>[显存]</code>中，那图形数据是什么呢？其实是所有渲染所需的数据。可能包含文字、几何图形。如果是在3D建模的情况下，则还有可能包含一些复杂的数据模型。     </p>
 <p>当这些数据全部传递到VRAM中后，CPU还需要配合GPU来进行一些操作。首先CPU把数据传递过去，然后设置好数据的属性[颜色、线宽、形状填充颜色、文字格式等]，接着就告诉GPU开始渲染了，GPU接收到指令之后，进行下一步操作。     </p>
-<h4 id="三、坐标转换"><a href="#三、坐标转换" class="headerlink" title="三、坐标转换"></a>三、坐标转换</h4>
+<h4 id="三、坐标转换"><a href="#三、坐标转换" class="headerlink" title="三、坐标转换"></a>三、坐标转换</h4><p>GPU在接收到图形数据的同时，也接收到了渲染指令。这时他会对每一个图形的每一个坐标点进行转换，从虚拟空间转换到屏幕空间<code>[CGPoint的转换]</code>。     </p>
+<h4 id="四、计算像素"><a href="#四、计算像素" class="headerlink" title="四、计算像素"></a>四、计算像素</h4><p>转换屏幕坐标系之后，我们依据所有坐标点来计算图形没条边的像素坐标，然后以此得出所要显示的图形边界。<br>得到边界以后，我们会逐个查看屏幕上的每个像素是否被这个图形覆盖。<br>通过遍历检查以后，会输出整个覆盖区域，此时再把所覆盖的区域的所有信息保存下来，进入下一步。     </p>
+<h4 id="五、硬件显示"><a href="#五、硬件显示" class="headerlink" title="五、硬件显示"></a>五、硬件显示</h4><p>假如显示器是基于阴极射线管<code>[CRT]</code>设计的，它通过电子枪的部件发射电子，经过处理变成电子束，然后用电子束去轰击屏幕表面涂抹的荧光粉，最后利用荧光粉被轰击后会变亮的特性来显示图形。     </p>
+<h4 id="六、代码"><a href="#六、代码" class="headerlink" title="六、代码"></a>六、代码</h4><pre><code>//Core Animation的CAShapeLayer图层子类
+- (void)drawingFirstMethod{
+
+    //创建路径
+    UIBezierPath *path = [[UIBezierPath alloc]init];
+
+    //向路径中添加一个圆
+    [path addArcWithCenter:CGPointMake(130, 150) radius:25 startAngle:0 endAngle:360 clockwise:YES];
+    //向路径中添加一个正方形
+    [path moveToPoint:CGPointMake(50, 50)];
+    [path addLineToPoint:CGPointMake(100, 50)];
+    [path addLineToPoint:CGPointMake(100, 100)];
+    [path addLineToPoint:CGPointMake(50, 100)];
+    [path addLineToPoint:CGPointMake(50, 50)];
+    //向路径中添加一个三角形
+    [path moveToPoint:CGPointMake(175, 50)];
+    [path addLineToPoint:CGPointMake(150, 100)];
+    [path addLineToPoint:CGPointMake(200, 100)];
+    [path closePath];
+
+    //新建一个图形图层，并设置图层属性
+    CAShapeLayer *shapeLayer = [CAShapeLayer layer];
+    shapeLayer.path = path.CGPath;
+    shapeLayer.lineWidth = 1.f;
+    shapeLayer.strokeColor = JHRGB(0, 0, 0).CGColor;
+    shapeLayer.fillColor = JHRGB(229, 229, 229).CGColor;
+
+    //向当前view的图层中添加新建的图层
+    [self.view.layer addSublayer:shapeLayer];
+
+}     
+</code></pre><h4 id="七、效果图"><a href="#七、效果图" class="headerlink" title="七、效果图"></a>七、效果图</h4><p><img src="https://upload-images.jianshu.io/upload_images/5129507-b6c5f95b6f6851ed.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="demo.png">     </p>
+
       
 
       
@@ -481,11 +518,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">ARKit</a>
+                <a href="javascript:void(0)" class="js-tag color5">项目解析</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">项目解析</a>
+                <a href="javascript:void(0)" class="js-tag color1">ARKit</a>
               </li>
             
             <div class="clearfix"></div>
