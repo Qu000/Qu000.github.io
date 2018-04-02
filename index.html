@@ -169,6 +169,206 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-ARKit-SpriteKit-Demo" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/02/ARKit-SpriteKit-Demo/">ARKit-SpriteKit-Demo</a>
+    </h1>
+  
+
+        
+        <a href="/2018/04/02/ARKit-SpriteKit-Demo/" class="archive-article-date">
+  	<time datetime="2018-04-02T07:03:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-02</time>
+</a>
+        
+        
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="https://upload-images.jianshu.io/upload_images/5129507-0e35ffdd22c969a9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="AR3.png">   </p>
+<h3 id="一、与SceneKit的对比"><a href="#一、与SceneKit的对比" class="headerlink" title="一、与SceneKit的对比"></a>一、与SceneKit的对比</h3><p>和SceneKit项目结构图一样，SpriteKit项目中多了一个Scene.sks的文件，这个文件是SpriteKit的场景文件，该文件只能看到2D平面。   </p>
+<h3 id="二、效果"><a href="#二、效果" class="headerlink" title="二、效果"></a>二、效果</h3><ul>
+<li>运行时，看到界面上只有相机画面。此时点击屏幕，就会出现一棵小松树，每多点一次，就会多一棵小松树。   </li>
+<li>不管你怎么移动手机，小松树始终朝向你，当你有多棵小松树时，它们之间始终保持一定的距离。   </li>
+<li>SpriteKit会把2D图像以漂浮的方式放入3D空间中，就类似一个广告牌放置在某处，当你移动设备时，这个广告牌始终朝向你。   </li>
+</ul>
+<h3 id="三、创建AR项目"><a href="#三、创建AR项目" class="headerlink" title="三、创建AR项目"></a>三、创建AR项目</h3><ul>
+<li>Content Technology：SpriteKit渲染框架   </li>
+<li>代码解析：   </li>
+</ul>
+<pre><code>#import &quot;ViewController.h&quot;
+#import &quot;Scene.h&quot;
+
+@interface ViewController () &lt;ARSKViewDelegate&gt;
+
+@property (nonatomic, strong) IBOutlet ARSKView *sceneView;
+
+@end
+
+
+@implementation ViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
+    // Set the view&apos;s delegate
+    //设置视图代理
+    self.sceneView.delegate = self;
+
+    // Show statistics such as fps and node count
+    //显示FPS信息
+    self.sceneView.showsFPS = YES;
+    //显示节点数
+    self.sceneView.showsNodeCount = YES;
+
+    // Load the SKScene from &apos;Scene.sks&apos;
+    //加载资源文件
+    Scene *scene = (Scene *)[SKScene nodeWithFileNamed:@&quot;Scene&quot;];
+
+    // Present the scene
+    //在视图中替换掉当前的场景，并且显示刚才加载的场景
+    [self.sceneView presentScene:scene];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+
+    // Create a session configuration
+    //创建会话配置对象
+    ARWorldTrackingConfiguration *configuration = [ARWorldTrackingConfiguration new];
+
+    // Run the view&apos;s session
+    //运行当前视图自带的会话
+    [self.sceneView.session runWithConfiguration:configuration];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+
+    // Pause the view&apos;s session
+    //停止运行当前视图自带的会话
+    [self.sceneView.session pause];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Release any cached data, images, etc that aren&apos;t in use.
+}
+
+#pragma mark - ARSKViewDelegate
+
+- (SKNode *)view:(ARSKView *)view nodeForAnchor:(ARAnchor *)anchor {
+    // Create and configure a node for the anchor added to the view&apos;s session.
+    //创建并设置一个节点，并且把它放到会话给定的锚点(位置)上
+    SKLabelNode *labelNode = [SKLabelNode labelNodeWithText:@&quot;👾&quot;];
+    labelNode.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeCenter;
+    labelNode.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
+    return labelNode;
+}   
+</code></pre><pre><code>#import &quot;Scene.h&quot;
+
+@implementation Scene
+
+- (void)didMoveToView:(SKView *)view {
+    // Setup your scene here
+}
+
+- (void)update:(CFTimeInterval)currentTime {
+    // Called before each frame is rendered
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    if (![self.view isKindOfClass:[ARSKView class]]) {
+        return;
+    }
+
+    ARSKView *sceneView = (ARSKView *)self.view;
+    ARFrame *currentFrame = [sceneView.session currentFrame];
+
+    // Create anchor using the camera&apos;s current position
+    //使用摄像头当前的位置创建一个锚点
+    if (currentFrame) {
+
+        // Create a transform with a translation of 0.2 meters in front of the camera
+        //创建一个向摄像头前方平移0.2m的转换
+        matrix_float4x4 translation = matrix_identity_float4x4;
+        translation.columns[3].z = -0.2;
+
+        //使用当前帧中摄像头的位置进行转换，转换后得到一个矩阵
+        matrix_float4x4 transform = matrix_multiply(currentFrame.camera.transform, translation);
+
+        // Add a new anchor to the session
+        //新建一个锚点并添加到会话中
+        ARAnchor *anchor = [[ARAnchor alloc] initWithTransform:transform];
+        [sceneView.session addAnchor:anchor];
+    }
+}   
+</code></pre>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">ARKit</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/04/02/ARKit-SpriteKit-Demo/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+
+
+
+  
     <article id="post-ARKit-SceneKit-Demo" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
