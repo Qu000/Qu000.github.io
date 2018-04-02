@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://qu000.github.io">
-  <title>ARKit-SpriteKit-Demo | iOS_July的博客</title>
+  <title>ARKit-Metal-Demo | iOS_July的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="keywords" content="iOS,ARKit">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ARKit-SpriteKit-Demo">
-<meta property="og:url" content="https://qu000.github.io/2018/04/02/ARKit-SpriteKit-Demo/index.html">
+<meta property="og:title" content="ARKit-Metal-Demo">
+<meta property="og:url" content="https://qu000.github.io/2018/04/02/ARKit-Metal-Demo/index.html">
 <meta property="og:site_name" content="iOS_July的博客">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5129507-0e35ffdd22c969a9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-04-02T07:05:43.642Z">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5129507-60c4b0ba7c1e1792.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-04-02T07:26:14.401Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ARKit-SpriteKit-Demo">
-<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/5129507-0e35ffdd22c969a9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:title" content="ARKit-Metal-Demo">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/5129507-60c4b0ba7c1e1792.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
   
     <link rel="alternative" href="/atom.xml" title="iOS_July的博客" type="application/atom+xml">
   
@@ -167,20 +167,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-ARKit-SpriteKit-Demo" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-ARKit-Metal-Demo" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      ARKit-SpriteKit-Demo
+      ARKit-Metal-Demo
     </h1>
   
 
         
-        <a href="/2018/04/02/ARKit-SpriteKit-Demo/" class="archive-article-date">
-  	<time datetime="2018-04-02T07:03:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-02</time>
+        <a href="/2018/04/02/ARKit-Metal-Demo/" class="archive-article-date">
+  	<time datetime="2018-04-02T07:25:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-02</time>
 </a>
         
         
@@ -193,24 +193,29 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="https://upload-images.jianshu.io/upload_images/5129507-0e35ffdd22c969a9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="AR3.png">   </p>
+        <p><img src="https://upload-images.jianshu.io/upload_images/5129507-60c4b0ba7c1e1792.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="AR4.jpg">   </p>
 <a id="more"></a>     
-<h3 id="一、与SceneKit的对比"><a href="#一、与SceneKit的对比" class="headerlink" title="一、与SceneKit的对比"></a>一、与SceneKit的对比</h3><p>和SceneKit项目结构图一样，SpriteKit项目中多了一个Scene.sks的文件，这个文件是SpriteKit的场景文件，该文件只能看到2D平面。   </p>
-<h3 id="二、效果"><a href="#二、效果" class="headerlink" title="二、效果"></a>二、效果</h3><ul>
-<li>运行时，看到界面上只有相机画面。此时点击屏幕，就会出现一棵小松树，每多点一次，就会多一棵小松树。   </li>
-<li>不管你怎么移动手机，小松树始终朝向你，当你有多棵小松树时，它们之间始终保持一定的距离。   </li>
-<li>SpriteKit会把2D图像以漂浮的方式放入3D空间中，就类似一个广告牌放置在某处，当你移动设备时，这个广告牌始终朝向你。   </li>
+<h3 id="一、对比"><a href="#一、对比" class="headerlink" title="一、对比"></a>一、对比</h3><p>Metal项目中，没有资源文件，但是有一个metal文件，是用于编写Shaders<code>[着色器]</code>的。   </p>
+<h3 id="二、运行效果"><a href="#二、运行效果" class="headerlink" title="二、运行效果"></a>二、运行效果</h3><ul>
+<li>屏幕上显示的是相机画面，点击屏幕，就会出现一个立方体。   </li>
 </ul>
 <h3 id="三、创建AR项目"><a href="#三、创建AR项目" class="headerlink" title="三、创建AR项目"></a>三、创建AR项目</h3><ul>
-<li>Content Technology：SpriteKit渲染框架   </li>
+<li>Content Technology：Metal渲染框架   </li>
 <li>代码解析：   </li>
 </ul>
 <pre><code>#import &quot;ViewController.h&quot;
-#import &quot;Scene.h&quot;
+#import &quot;Renderer.h&quot;
 
-@interface ViewController () &lt;ARSKViewDelegate&gt;
+@interface ViewController () &lt;MTKViewDelegate, ARSessionDelegate&gt;
 
-@property (nonatomic, strong) IBOutlet ARSKView *sceneView;
+//声明会话和渲染器
+@property (nonatomic, strong) ARSession *session;
+@property (nonatomic, strong) Renderer *renderer;
+
+@end
+
+
+@interface MTKView () &lt;RenderDestinationProvider&gt;
 
 @end
 
@@ -220,43 +225,56 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    // Set the view&apos;s delegate
-    //设置视图代理
-    self.sceneView.delegate = self;
+    // Create an ARSession
+    //创建ARSession会话并设置代理
+    self.session = [ARSession new];
+    self.session.delegate = self;
 
-    // Show statistics such as fps and node count
-    //显示FPS信息
-    self.sceneView.showsFPS = YES;
-    //显示节点数
-    self.sceneView.showsNodeCount = YES;
+    // Set the view to use the default device
+    //设置当前视图为Metal视图
+    MTKView *view = (MTKView *)self.view;
+    //设置Metal视图使用系统默认的Metal设备
+    view.device = MTLCreateSystemDefaultDevice();
+    //设置Metal视图的背景色和代理
+    view.backgroundColor = UIColor.clearColor;
+    view.delegate = self;
 
-    // Load the SKScene from &apos;Scene.sks&apos;
-    //加载资源文件
-    Scene *scene = (Scene *)[SKScene nodeWithFileNamed:@&quot;Scene&quot;];
+    //如果当前设备不支持Metal，这里就会提前结束程序
+    if(!view.device) {
+        NSLog(@&quot;Metal is not supported on this device&quot;);
+        return;
+    }
 
-    // Present the scene
-    //在视图中替换掉当前的场景，并且显示刚才加载的场景
-    [self.sceneView presentScene:scene];
+    // Configure the renderer to draw to the view
+    //设置渲染器以将其绘制到视图中
+    self.renderer = [[Renderer alloc] initWithSession:self.session metalDevice:view.device renderDestinationProvider:view];
+
+    //设置渲染器大小
+    [self.renderer drawRectResized:view.bounds.size];
+
+    //向Metal视图中添加点击手势
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+    NSMutableArray *gestureRecognizers = [NSMutableArray array];
+    [gestureRecognizers addObject:tapGesture];
+    [gestureRecognizers addObjectsFromArray:view.gestureRecognizers];
+    view.gestureRecognizers = gestureRecognizers;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 
-    // Create a session configuration
     //创建会话配置对象
     ARWorldTrackingConfiguration *configuration = [ARWorldTrackingConfiguration new];
 
-    // Run the view&apos;s session
-    //运行当前视图自带的会话
-    [self.sceneView.session runWithConfiguration:configuration];
+    //运行新建会话
+    [self.session runWithConfiguration:configuration];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
 
-    // Pause the view&apos;s session
-    //停止运行当前视图自带的会话
-    [self.sceneView.session pause];
+    //停止运行会话
+    [self.session pause];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -264,42 +282,15 @@
     // Release any cached data, images, etc that aren&apos;t in use.
 }
 
-#pragma mark - ARSKViewDelegate
-
-- (SKNode *)view:(ARSKView *)view nodeForAnchor:(ARAnchor *)anchor {
-    // Create and configure a node for the anchor added to the view&apos;s session.
-    //创建并设置一个节点，并且把它放到会话给定的锚点(位置)上
-    SKLabelNode *labelNode = [SKLabelNode labelNodeWithText:@&quot;👾&quot;];
-    labelNode.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeCenter;
-    labelNode.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
-    return labelNode;
-}   
-</code></pre><pre><code>#import &quot;Scene.h&quot;
-
-@implementation Scene
-
-- (void)didMoveToView:(SKView *)view {
-    // Setup your scene here
-}
-
-- (void)update:(CFTimeInterval)currentTime {
-    // Called before each frame is rendered
-}
-
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    if (![self.view isKindOfClass:[ARSKView class]]) {
-        return;
-    }
-
-    ARSKView *sceneView = (ARSKView *)self.view;
-    ARFrame *currentFrame = [sceneView.session currentFrame];
+- (void)handleTap:(UIGestureRecognizer*)gestureRecognize {
+    ARFrame *currentFrame = [self.session currentFrame];
 
     // Create anchor using the camera&apos;s current position
     //使用摄像头当前的位置创建一个锚点
     if (currentFrame) {
 
         // Create a transform with a translation of 0.2 meters in front of the camera
-        //创建一个向摄像头前方平移0.2m的转换
+        //创建一个向摄像头前平移0.2m的转换
         matrix_float4x4 translation = matrix_identity_float4x4;
         translation.columns[3].z = -0.2;
 
@@ -309,8 +300,23 @@
         // Add a new anchor to the session
         //新建一个锚点并添加到会话中
         ARAnchor *anchor = [[ARAnchor alloc] initWithTransform:transform];
-        [sceneView.session addAnchor:anchor];
+        [self.session addAnchor:anchor];
     }
+}
+
+#pragma mark - MTKViewDelegate
+
+// Called whenever view changes orientation or layout is changed
+//每当视图改变方向或布局时，就会调用这个代理方法
+- (void)mtkView:(nonnull MTKView *)view drawableSizeWillChange:(CGSize)size {
+    [self.renderer drawRectResized:view.bounds.size];
+}
+
+// Called whenever the view needs to render
+//在视图需要渲染时调用
+- (void)drawInMTKView:(nonnull MTKView *)view {
+    //渲染器更新渲染
+    [self.renderer update];
 }   
 </code></pre>
       
@@ -411,7 +417,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://qu000.github.io/2018/04/02/ARKit-SpriteKit-Demo/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://qu000.github.io/2018/04/02/ARKit-Metal-Demo/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -425,18 +431,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/04/02/ARKit-Metal-Demo/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          ARKit-Metal-Demo
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/04/02/ARKit-SceneKit-Demo/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">ARKit-SceneKit-Demo</div>
+    <a href="/2018/04/02/ARKit-SpriteKit-Demo/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">ARKit-SpriteKit-Demo</div>
       <i class="icon-circle-right"></i>
     </a>
   

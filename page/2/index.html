@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://qu000.github.io">
-  <title>ARKit-SpriteKit-Demo | iOS_July的博客</title>
+  <title>iOS_July的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="keywords" content="iOS,ARKit">
-<meta property="og:type" content="article">
-<meta property="og:title" content="ARKit-SpriteKit-Demo">
-<meta property="og:url" content="https://qu000.github.io/2018/04/02/ARKit-SpriteKit-Demo/index.html">
+  <meta name="description" content="重庆工程学院15级，就职于重庆好美家网络传媒有限公司。擅长iOS移动开发，目前正深入研究多媒体-视频服务。其实就是个才上路的实习生。快毕业了，2018目标：多媒体-音频、视频">
+<meta name="keywords" content="iOS,HTML5,开发者,Coder,视频直播,微信小程序,未毕业">
+<meta property="og:type" content="website">
+<meta property="og:title" content="iOS_July的博客">
+<meta property="og:url" content="https://qu000.github.io/page/2/index.html">
 <meta property="og:site_name" content="iOS_July的博客">
+<meta property="og:description" content="重庆工程学院15级，就职于重庆好美家网络传媒有限公司。擅长iOS移动开发，目前正深入研究多媒体-视频服务。其实就是个才上路的实习生。快毕业了，2018目标：多媒体-音频、视频">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5129507-0e35ffdd22c969a9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-04-02T07:05:43.642Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ARKit-SpriteKit-Demo">
-<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/5129507-0e35ffdd22c969a9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:title" content="iOS_July的博客">
+<meta name="twitter:description" content="重庆工程学院15级，就职于重庆好美家网络传媒有限公司。擅长iOS移动开发，目前正深入研究多媒体-视频服务。其实就是个才上路的实习生。快毕业了，2018目标：多媒体-音频、视频">
   
     <link rel="alternative" href="/atom.xml" title="iOS_July的博客" type="application/atom+xml">
   
@@ -167,281 +167,60 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-ARKit-SpriteKit-Demo" class="article article-type-post " itemscope itemprop="blogPost">
+            
+  
+    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 class="article-title" itemprop="name">
-      ARKit-SpriteKit-Demo
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/22/hello-world/">Hello World</a>
     </h1>
   
 
         
-        <a href="/2018/04/02/ARKit-SpriteKit-Demo/" class="archive-article-date">
-  	<time datetime="2018-04-02T07:03:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-02</time>
+        <a href="/2018/03/22/hello-world/" class="archive-article-date">
+  	<time datetime="2018-03-22T10:08:52.072Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-22</time>
 </a>
         
-        
-        <span class="archive-article-date">
-			    阅读量 <span id="busuanzi_value_page_pv"></span>
-		    </span>
         
 
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="https://upload-images.jianshu.io/upload_images/5129507-0e35ffdd22c969a9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="AR3.png">   </p>
-<a id="more"></a>     
-<h3 id="一、与SceneKit的对比"><a href="#一、与SceneKit的对比" class="headerlink" title="一、与SceneKit的对比"></a>一、与SceneKit的对比</h3><p>和SceneKit项目结构图一样，SpriteKit项目中多了一个Scene.sks的文件，这个文件是SpriteKit的场景文件，该文件只能看到2D平面。   </p>
-<h3 id="二、效果"><a href="#二、效果" class="headerlink" title="二、效果"></a>二、效果</h3><ul>
-<li>运行时，看到界面上只有相机画面。此时点击屏幕，就会出现一棵小松树，每多点一次，就会多一棵小松树。   </li>
-<li>不管你怎么移动手机，小松树始终朝向你，当你有多棵小松树时，它们之间始终保持一定的距离。   </li>
-<li>SpriteKit会把2D图像以漂浮的方式放入3D空间中，就类似一个广告牌放置在某处，当你移动设备时，这个广告牌始终朝向你。   </li>
-</ul>
-<h3 id="三、创建AR项目"><a href="#三、创建AR项目" class="headerlink" title="三、创建AR项目"></a>三、创建AR项目</h3><ul>
-<li>Content Technology：SpriteKit渲染框架   </li>
-<li>代码解析：   </li>
-</ul>
-<pre><code>#import &quot;ViewController.h&quot;
-#import &quot;Scene.h&quot;
-
-@interface ViewController () &lt;ARSKViewDelegate&gt;
-
-@property (nonatomic, strong) IBOutlet ARSKView *sceneView;
-
-@end
-
-
-@implementation ViewController
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-
-    // Set the view&apos;s delegate
-    //设置视图代理
-    self.sceneView.delegate = self;
-
-    // Show statistics such as fps and node count
-    //显示FPS信息
-    self.sceneView.showsFPS = YES;
-    //显示节点数
-    self.sceneView.showsNodeCount = YES;
-
-    // Load the SKScene from &apos;Scene.sks&apos;
-    //加载资源文件
-    Scene *scene = (Scene *)[SKScene nodeWithFileNamed:@&quot;Scene&quot;];
-
-    // Present the scene
-    //在视图中替换掉当前的场景，并且显示刚才加载的场景
-    [self.sceneView presentScene:scene];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-
-    // Create a session configuration
-    //创建会话配置对象
-    ARWorldTrackingConfiguration *configuration = [ARWorldTrackingConfiguration new];
-
-    // Run the view&apos;s session
-    //运行当前视图自带的会话
-    [self.sceneView.session runWithConfiguration:configuration];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-
-    // Pause the view&apos;s session
-    //停止运行当前视图自带的会话
-    [self.sceneView.session pause];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Release any cached data, images, etc that aren&apos;t in use.
-}
-
-#pragma mark - ARSKViewDelegate
-
-- (SKNode *)view:(ARSKView *)view nodeForAnchor:(ARAnchor *)anchor {
-    // Create and configure a node for the anchor added to the view&apos;s session.
-    //创建并设置一个节点，并且把它放到会话给定的锚点(位置)上
-    SKLabelNode *labelNode = [SKLabelNode labelNodeWithText:@&quot;👾&quot;];
-    labelNode.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeCenter;
-    labelNode.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
-    return labelNode;
-}   
-</code></pre><pre><code>#import &quot;Scene.h&quot;
-
-@implementation Scene
-
-- (void)didMoveToView:(SKView *)view {
-    // Setup your scene here
-}
-
-- (void)update:(CFTimeInterval)currentTime {
-    // Called before each frame is rendered
-}
-
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    if (![self.view isKindOfClass:[ARSKView class]]) {
-        return;
-    }
-
-    ARSKView *sceneView = (ARSKView *)self.view;
-    ARFrame *currentFrame = [sceneView.session currentFrame];
-
-    // Create anchor using the camera&apos;s current position
-    //使用摄像头当前的位置创建一个锚点
-    if (currentFrame) {
-
-        // Create a transform with a translation of 0.2 meters in front of the camera
-        //创建一个向摄像头前方平移0.2m的转换
-        matrix_float4x4 translation = matrix_identity_float4x4;
-        translation.columns[3].z = -0.2;
-
-        //使用当前帧中摄像头的位置进行转换，转换后得到一个矩阵
-        matrix_float4x4 transform = matrix_multiply(currentFrame.camera.transform, translation);
-
-        // Add a new anchor to the session
-        //新建一个锚点并添加到会话中
-        ARAnchor *anchor = [[ARAnchor alloc] initWithTransform:transform];
-        [sceneView.session addAnchor:anchor];
-    }
-}   
-</code></pre>
-      
+        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
 
       
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>我能有打赏吗？<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="/img/wechat.png">
-                      <span class="reward-type">微信</span>
-                    </div>
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
+
       
     </div>
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">ARKit</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
       
 
       
-
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/22/hello-world/">展开全文 >></a>
+        </p>
       
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
-        </div>
-      </div>
-    </span>
-  </div>
-</div>
 
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://qu000.github.io/2018/04/02/ARKit-SpriteKit-Demo/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2018/04/02/ARKit-Metal-Demo/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          ARKit-Metal-Demo
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2018/04/02/ARKit-SceneKit-Demo/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">ARKit-SceneKit-Demo</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -462,37 +241,16 @@
 
 
 
-  
 
-  
-
-  
-
-  
-
-  
 
 
   
-<!-- 来必力City版安装代码 -->
-<div id="lv-container" data-id="city" data-uid="MTAyMC8zNTAxOC8xMTU1NQ==">
-  <script type="text/javascript">
-    (function(d, s) {
-      var j, e = d.getElementsByTagName(s)[0];
-
-      if (typeof LivereTower === 'function') { return; }
-
-      j = d.createElement(s);
-      j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-      j.async = true;
-
-      e.parentNode.insertBefore(j, e);
-    })(document, 'script');
-  </script>
-  <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
-</div>
-<!-- City版安装代码已完成 -->
   
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    </nav>
+  
+
 
           </div>
         </div>
@@ -520,8 +278,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: false,
-		isPost: true,
+		isHome: true,
+		isPost: false,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
