@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://qu000.github.io">
-  <title>AR初识 | iOS_July的博客</title>
+  <title>ARKit-SceneKit-Demo | iOS_July的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="keywords" content="iOS,ARKit">
 <meta property="og:type" content="article">
-<meta property="og:title" content="AR初识">
-<meta property="og:url" content="https://qu000.github.io/2018/04/01/AR初识/index.html">
+<meta property="og:title" content="ARKit-SceneKit-Demo">
+<meta property="og:url" content="https://qu000.github.io/2018/04/02/ARKit-SceneKit-Demo/index.html">
 <meta property="og:site_name" content="iOS_July的博客">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5129507-90f8b996aef6feb2.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-04-01T04:17:28.601Z">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5129507-75d476e89ca7c143.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-04-02T06:12:45.911Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="AR初识">
-<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/5129507-90f8b996aef6feb2.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:title" content="ARKit-SceneKit-Demo">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/5129507-75d476e89ca7c143.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
   
     <link rel="alternative" href="/atom.xml" title="iOS_July的博客" type="application/atom+xml">
   
@@ -167,20 +167,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-AR初识" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-ARKit-SceneKit-Demo" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      AR初识
+      ARKit-SceneKit-Demo
     </h1>
   
 
         
-        <a href="/2018/04/01/AR初识/" class="archive-article-date">
-  	<time datetime="2018-04-01T04:09:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-01</time>
+        <a href="/2018/04/02/ARKit-SceneKit-Demo/" class="archive-article-date">
+  	<time datetime="2018-04-02T06:08:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-02</time>
 </a>
         
         
@@ -193,35 +193,73 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="https://upload-images.jianshu.io/upload_images/5129507-90f8b996aef6feb2.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="timg-2.jpeg">   </p>
-<a id="more"></a>     
-<h3 id="一、ARKit概述"><a href="#一、ARKit概述" class="headerlink" title="一、ARKit概述"></a>一、ARKit概述</h3><p>ARKit是iOS11的原生框架，这也就意味着开发者在接入时不需要考虑是否会占用APP包大小，可以使用Objective-C与Swift语言进行开发。<br>框架涉及了机器视觉、传感器融合、相机调校、惯性视觉导航、光照估算、SLAM<code>[即时定位和地图构建]</code>等。  </p>
-<p>因为ARKit实时运算很大，所以对CPU有一定要求使用设备如下:     </p>
-<ul>
-<li>iOS系统：iOS11及以上     </li>
-<li>Mac系统：Mac OS10.12.4及以上   </li>
-<li>IDE：Xcode9及以上   </li>
-<li>iOS设备：iPhone6s 及以上、iPhone SE   </li>
-<li>iPad设备：不支持iPad mini、iPad Air全系列，支持iPad 2017版及以上、iPad Pro全系列   </li>
-<li>第三方游戏引擎：Unity、Unreal Engine[虚幻引擎]   </li>
+        <p><img src="https://upload-images.jianshu.io/upload_images/5129507-75d476e89ca7c143.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="AR2.jpg"><br><a id="more"></a>     </p>
+<h3 id="一、创建AR项目"><a href="#一、创建AR项目" class="headerlink" title="一、创建AR项目"></a>一、创建AR项目</h3><ul>
+<li>Content Technology：SceneKit渲染框架   </li>
+<li>代码解析：   </li>
 </ul>
-<h3 id="二、ARKit处理模块"><a href="#二、ARKit处理模块" class="headerlink" title="二、ARKit处理模块"></a>二、ARKit处理模块</h3><ul>
-<li>世界跟踪   </li>
+<pre><code>#import &quot;ViewController.h&quot;
+
+@interface ViewController () &lt;ARSCNViewDelegate&gt;
+//ARKit框架中用于3D显示的预览视图
+@property (nonatomic, strong) IBOutlet ARSCNView *sceneView;
+
+@end
+
+
+@implementation ViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
+    // Set the view&apos;s delegate
+    //设置视图代理
+    self.sceneView.delegate = self;
+
+    // Show statistics such as fps and timing information
+    //设置显示FPS和其他参数
+    self.sceneView.showsStatistics = YES;
+
+    // Create a new scene
+    //使用模型创建节点（scn格式文件是一个基于3D建模的文件，使用3DMax软件可以创建，这里系统有一个默认的3D飞机）
+    //使用SceneKit资源文件创建场景对象
+    SCNScene *scene = [SCNScene sceneNamed:@&quot;art.scnassets/ship.scn&quot;];
+
+    // Set the scene to the view
+    //设置ARKit的场景为SceneKit的当前场景（SCNScene是Scenekit中的场景，类似于UIView）
+    //把从文件中加载的场景设置到视图中
+    self.sceneView.scene = scene;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+
+    // Create a session configuration
+    //创建一个追踪设备配置（ARWorldTrackingSessionConfiguration主要负责传感器追踪手机的移动和旋转）
+    //创建会话配置对象
+    ARWorldTrackingConfiguration *configuration = [ARWorldTrackingConfiguration new];
+
+    // Run the view&apos;s session
+    // 开始启动ARSession会话（启动AR）
+    //运行当前视图自带的会话
+    [self.sceneView.session runWithConfiguration:configuration];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+
+
+    // 暂停ARSession会话
+    //停止运行当前视图自带的会话
+    [self.sceneView.session pause];
+}   
+</code></pre><h3 id="二、流程"><a href="#二、流程" class="headerlink" title="二、流程"></a>二、流程</h3><ul>
+<li>首先建立会话、然后配置会话、接着直接运行   </li>
+<li>在viewDidLoad方法中，首先设置好视图代理、初始化视图场景，此时视图会自带一个ARSession会话   </li>
+<li>然后在viewWillAppear:方法中开始初始化会话配置类、直接运行当前视图自带的会话   </li>
+<li>紧接着会话开始所有的处理操作   </li>
+<li>最后由ARSCNView渲染视图   </li>
 </ul>
-<p>当相机捕捉到实时画面后，在画面中添加一个几何模型。此时手机开始运动。<br>运动对手机的位置和姿态产品产生的变化都会对这个几何模型产生影响。<br>ARKit使用视觉惯性里程计<code>[VIO]</code>的技术来实时跟踪设备的位置和姿态变化。<br>因为是对手机在现实世界中的运动进行跟踪，所以叫世界跟踪。   </p>
-<ul>
-<li>场景理解   </li>
-</ul>
-<p>当实时获取到手机运动的轨迹和姿态变化后，就需要在相机画面中添加虚拟的几何模型。<br>场景理解是指手机通过一系列软件算法来分析相机图像，以此得到相机所处环境的信息。   </p>
-<ul>
-<li>几何渲染   </li>
-</ul>
-<p>紧接着是要解决几何模型如何添加到场景中的问题。<br>场景是以二维画面的形式展示在手机屏幕上的，而几何模型就需要把自己从三维模型转为二维图像。<br>在转换的过程中，需要考虑到手机位姿信息、场景信息、光照亮度。虽然之前已经得到了这些信息，但是ARKit并不具备绘制渲染的能力。<br>ARKit在渲染框架上有多项选择，可使用系统原生的SceneKit<code>[3D]</code>、SpriteKit<code>[2D]</code>、Metal框架，也可以使用第三方游戏引擎Unity、Unreal Engine。   </p>
-<ul>
-<li>人脸跟踪   </li>
-</ul>
-<p>人脸跟踪只适用于iPhone X，因为Apple所有的机型中只有iPhone X配备了原深感摄像头。<br>通过原深感摄像头可直接根据检测到的面部表情来驱动3D几何模型。<br>因为原深感摄像头是前置的，所以人脸跟踪也是使用的前置摄像头，而前三个模块是使用的后置摄像头。   </p>
-<h3 id="三、ARKit结构"><a href="#三、ARKit结构" class="headerlink" title="三、ARKit结构"></a>三、ARKit结构</h3><p>ARSession是ARKit中最重要的类，它使用ARConfiguration类来运行自己开启跟踪，会处理输出ARFrame类。<br>ARFrame类中包含了场景信息<code>[ARLightEstimate类、ARAnchor类、ARPointCloud类]</code>与跟踪信息<code>[ARCamera类]</code>。<br>从当前场景中检测出来的用户面部<code>[ARFaceAnchor类]</code>、水平面<code>[ARPlaneAnchor类]</code>都以ARAnchor类的子类出现。得到这两个信息之后，就可以进行渲染了。   </p>
 
       
 
@@ -321,7 +359,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://qu000.github.io/2018/04/01/AR初识/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://qu000.github.io/2018/04/02/ARKit-SceneKit-Demo/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -335,18 +373,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/04/02/ARKit-SceneKit-Demo/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          ARKit-SceneKit-Demo
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/03/31/绘制图形及理解感悟/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">绘制图形及理解感悟</div>
+    <a href="/2018/04/01/AR初识/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">AR初识</div>
       <i class="icon-circle-right"></i>
     </a>
   
