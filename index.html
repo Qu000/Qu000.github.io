@@ -191,60 +191,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="https://upload-images.jianshu.io/upload_images/5129507-3cbf8b88c5d48ab1.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="占位图.jpg">   </p>
-<ul>
-<li><p>弹幕能极大的增强用户交互感、也是直播吸引人的关键点之一。   </p>
-<blockquote>
-<p>今做一个小分享，基于<code>BarrageRenderer库</code>的弹幕simpleDemo。   </p>
-</blockquote>
-</li>
-<li><p>代码部分示例：   </p>
-</li>
-</ul>
-<pre><code>/** 生成精灵描述 - 过场文字弹幕*/
-- (BarrageDescriptor *)walkTextSpriteDescriptorWithDirection:(NSInteger)direction{
-    BarrageDescriptor *descriptor = [[BarrageDescriptor alloc]init];
-    descriptor.spriteName = NSStringFromClass([BarrageWalkTextSprite class]);
-    descriptor.params[@&quot;text&quot;] = self.danMuText[arc4random_uniform((uint32_t)self.danMuText.count)];
-    descriptor.params[@&quot;textColor&quot;] = Color(arc4random_uniform(256), arc4random_uniform(256), arc4random_uniform(256));
-    descriptor.params[@&quot;speed&quot;] = @(100 * (double)random()/RAND_MAX+50);
-    descriptor.params[@&quot;direction&quot;] = @(direction);
-
-    return descriptor;
-}   
-</code></pre><pre><code>#pragma mark - 弹幕控制 方法
-- (void)autoSendBarrage
-{
-    NSInteger spriteNumber = [_renderer spritesNumberWithName:nil];
-    if (spriteNumber &lt;= 50) { // 限制屏幕上的弹幕量
-        [_renderer receive:[self walkTextSpriteDescriptorWithDirection:BarrageWalkDirectionR2L]];
-    }
-}
-- (IBAction)startBtn:(id)sender {
-
-    [self setupRenderer];
-
-    [_renderer start];
-}
-
-- (IBAction)closeBtn:(id)sender {
-    [_renderer stop];
-    [_renderer.view removeFromSuperview];
-    _renderer = nil;
-}   
-</code></pre><pre><code>#pragma mark - 弹幕描述符生产方法
-- (NSArray *)danMuText
-{
-    return [NSArray arrayWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@&quot;danmu.plist&quot; ofType:nil]];
-}   
-</code></pre><ul>
-<li>效果图：   </li>
-</ul>
-<p><img src="https://upload-images.jianshu.io/upload_images/5129507-b4ecc37da96c6513.gif?imageMogr2/auto-orient/strip" alt="danmu.gif">   </p>
-<ul>
-<li>此处为Demo<a href="https://github.com/Qu000/BarrageTest" target="_blank" rel="noopener">传送门</a></li>
-</ul>
-
+        <p><img src="https://upload-images.jianshu.io/upload_images/5129507-3cbf8b88c5d48ab1.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="占位图.jpg"><br>
+        
+          <a class="article-more-a" href="/2018/04/18/直播弹幕SimpleDemo/#more">more >></a>
+        
       
 
       
@@ -1191,11 +1141,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">重修笔记</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color5">重修笔记</a>
               </li>
              
               <li class="article-tag-list-item">
