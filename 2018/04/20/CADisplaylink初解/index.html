@@ -16,7 +16,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5129507-d1aa458a765ab75b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/5129507-b8d98b25b39bd4b5.gif?imageMogr2/auto-orient/strip">
-<meta property="og:updated_time" content="2018-04-20T04:23:10.127Z">
+<meta property="og:updated_time" content="2018-04-20T04:27:52.924Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CADisplaylink初解">
 <meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/5129507-d1aa458a765ab75b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
@@ -195,10 +195,9 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p><img src="https://upload-images.jianshu.io/upload_images/5129507-d1aa458a765ab75b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="占位图.jpg">     </p>
-<a id="more"></a>         
-<p>###一、理解准备   </p>
-<ul>
-<li><p>CADisplaylink 是一个计时器对象   </p>
+<a id="more"></a>     
+<h3 id="一、理解准备"><a href="#一、理解准备" class="headerlink" title="一、理解准备"></a>一、理解准备</h3><ul>
+<li><p><code>CADisplaylink</code>是一个计时器对象   </p>
 </li>
 <li><p>可以使用这个对象来保持应用中的绘制与显示刷新的同步   </p>
 </li>
@@ -214,8 +213,7 @@
 </code></pre><ul>
 <li>只要<code>CADisplayLink对象</code>加入Runloop中，则会在屏幕需要刷新时回调<code>@selector</code></li>
 </ul>
-<p>###二、重要方法、属性   </p>
-<ul>
+<h3 id="二、重要方法、属性"><a href="#二、重要方法、属性" class="headerlink" title="二、重要方法、属性"></a>二、重要方法、属性</h3><ul>
 <li><p>通过该方法，以target/selector模式生成一个绑定了触发事件的实例对象<br><code>+ (CADisplayLink *)displayLinkWithTarget:(id)target selector:(SEL)sel;</code>   </p>
 </li>
 <li><p>但是，如果你仅仅只生成一个实例对象，那么你所绑定的方法并不会执行，此时，需要将其加入到Runloop中<br><code>- (void)addToRunLoop:(NSRunLoop *)runloop forMode:(NSRunLoopMode)mode;</code>   </p>
@@ -227,29 +225,28 @@
 </ul>
 <hr>
 <ul>
-<li><p>paused   </p>
+<li><p><font color="red">paused</font>   </p>
 <blockquote>
 <p>暂停 <code>self.timer.paused = YES;</code>   </p>
 </blockquote>
 </li>
-<li><p>frameInterval   </p>
+<li><p><font color="red">frameInterval</font>   </p>
 <blockquote>
 <p>selector触发间隔<code>self.timer.frameInterval = 2;</code>   </p>
 </blockquote>
 </li>
-<li><p>timestamp   </p>
+<li><p><font color="green">timestamp</font>   </p>
 <blockquote>
 <p>获取上一次selector被执行的时间戳<br>只有当selector被执行过一次之后这个值才会被取到有效值<br>这个属性是用来比较当前图层时间与上一次selector执行时间的差，从而来计算本次UI应该发生的改变的进度（例如视图做移动效果   </p>
 </blockquote>
 </li>
-<li><p>duration   </p>
+<li><p><font color="green">duration</font>   </p>
 <blockquote>
 <p>获取当前设备的屏幕刷新时间间隔<br>需要selector触发一次才可以取值<br>当前iOS设备的刷新频率都是60HZ,也就是说每16.7ms刷新一次<br>用于辅助计算<br>如果CPU过于繁忙，duration的值会浮动     </p>
 </blockquote>
 </li>
 </ul>
-<p>#####ps：最近忙了，昨天阿里云备案<code>提交管局</code>了<code>[初审失败了，资料填写也挺麻烦的，不过失败是好事]</code>，公司愈来愈会忙，但也正合我的心意，<font color="purple">希望自己能在这个毕业季有一个长足的进步。</font>   </p>
-<ul>
+<h5 id="ps：最近忙了，昨天阿里云备案提交管局了-初审失败了，资料填写也挺麻烦的，不过失败是好事-，公司愈来愈会忙，但也正合我的心意，希望自己能在这个毕业季有一个长足的进步。"><a href="#ps：最近忙了，昨天阿里云备案提交管局了-初审失败了，资料填写也挺麻烦的，不过失败是好事-，公司愈来愈会忙，但也正合我的心意，希望自己能在这个毕业季有一个长足的进步。" class="headerlink" title="ps：最近忙了，昨天阿里云备案提交管局了[初审失败了，资料填写也挺麻烦的，不过失败是好事]，公司愈来愈会忙，但也正合我的心意，希望自己能在这个毕业季有一个长足的进步。"></a>ps：最近忙了，昨天阿里云备案<code>提交管局</code>了<code>[初审失败了，资料填写也挺麻烦的，不过失败是好事]</code>，公司愈来愈会忙，但也正合我的心意，<font color="purple">希望自己能在这个毕业季有一个长足的进步。</font></h5><ul>
 <li><p>效果图 ：<br><img src="https://upload-images.jianshu.io/upload_images/5129507-b8d98b25b39bd4b5.gif?imageMogr2/auto-orient/strip" alt="CADiplaylink.gif"></p>
 </li>
 <li><p>这里是Demo<a href="https://github.com/Qu000/CADisplaylinkTset" target="_blank" rel="noopener">传送门</a></p>
@@ -537,11 +534,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">重修笔记</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color5">重修笔记</a>
               </li>
             
             <div class="clearfix"></div>
