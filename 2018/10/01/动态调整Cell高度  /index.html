@@ -6,19 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://qu000.github.io">
-  <title>Archives: 2018/4 | iOS_July的博客</title>
+  <title>iOS_July的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="2018年6月29日毕业于重庆工程学院，就职于重庆手执科技有限公司。擅长iOS移动开发，会swift，短期目标：完成公司项目，补充iOS高级开发的知识与技巧。2018顺带目标：多媒体-音频、视频">
+  <meta name="description" content="动态调整Cell高度 iOS8之后推出了self-sizing，在此之前涉及到单元格高度动态调整，则需要通过代码来实现，根据单元格填充的内容，来动态计算出所需的高度，装在数据模型之中，把这个高度的属性返回到表示图的代理方法中。  计算文字的高度 新增一个NSString类型的分类，扩充一个方法，根据输入的文字内容text，字体font，以及宽度width，计算出高度。">
 <meta name="keywords" content="iOS,HTML5,开发者,Coder,视频直播,微信小程序">
-<meta property="og:type" content="website">
+<meta property="og:type" content="article">
 <meta property="og:title" content="iOS_July的博客">
-<meta property="og:url" content="https://qu000.github.io/archives/2018/04/page/2/index.html">
+<meta property="og:url" content="https://qu000.github.io/2018/10/01/动态调整Cell高度  /index.html">
 <meta property="og:site_name" content="iOS_July的博客">
-<meta property="og:description" content="2018年6月29日毕业于重庆工程学院，就职于重庆手执科技有限公司。擅长iOS移动开发，会swift，短期目标：完成公司项目，补充iOS高级开发的知识与技巧。2018顺带目标：多媒体-音频、视频">
+<meta property="og:description" content="动态调整Cell高度 iOS8之后推出了self-sizing，在此之前涉及到单元格高度动态调整，则需要通过代码来实现，根据单元格填充的内容，来动态计算出所需的高度，装在数据模型之中，把这个高度的属性返回到表示图的代理方法中。  计算文字的高度 新增一个NSString类型的分类，扩充一个方法，根据输入的文字内容text，字体font，以及宽度width，计算出高度。">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-10-01T01:52:15.435Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS_July的博客">
-<meta name="twitter:description" content="2018年6月29日毕业于重庆工程学院，就职于重庆手执科技有限公司。擅长iOS移动开发，会swift，短期目标：完成公司项目，补充iOS高级开发的知识与技巧。2018顺带目标：多媒体-音频、视频">
+<meta name="twitter:description" content="动态调整Cell高度 iOS8之后推出了self-sizing，在此之前涉及到单元格高度动态调整，则需要通过代码来实现，根据单元格填充的内容，来动态计算出所需的高度，装在数据模型之中，把这个高度的属性返回到表示图的代理方法中。  计算文字的高度 新增一个NSString类型的分类，扩充一个方法，根据输入的文字内容text，字体font，以及宽度width，计算出高度。">
   
     <link rel="alternative" href="/atom.xml" title="iOS_July的博客" type="application/atom+xml">
   
@@ -175,69 +176,174 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-动态调整Cell高度  " class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="动态调整Cell高度"><a href="#动态调整Cell高度" class="headerlink" title="动态调整Cell高度"></a>动态调整Cell高度</h2><blockquote>
+<p>iOS8之后推出了<code>self-sizing</code>，在此之前涉及到单元格高度动态调整，则需要通过代码来实现，根据单元格填充的内容，来动态计算出所需的高度，装在数据模型之中，把这个高度的属性返回到表示图的代理方法中。</p>
+</blockquote>
+<h4 id="计算文字的高度"><a href="#计算文字的高度" class="headerlink" title="计算文字的高度"></a>计算文字的高度</h4><ul>
+<li>新增一个<code>NSString类型</code>的分类，扩充一个方法，根据输入的文字内容text，字体font，以及宽度width，计算出高度。</li>
+</ul>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>我能有打赏吗？<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/wechat.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/04/01/AR初识/" class="archive-article-date">
-  	<time datetime="2018-04-01T04:09:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-01</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/04/01/AR初识/">AR初识</a>
-    </h1>
-  
+      
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">iOS</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">ARKit</a>
-        		</li>
-      		
-		</ul>
-	</div>
+      
 
-          
-
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://qu000.github.io/2018/10/01/动态调整Cell高度  /" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2018/04/23/about-me/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">about-me</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/2018/04/">&laquo; Prev</a><a class="page-number" href="/archives/2018/04/">1</a><span class="page-number current">2</span>
-    </nav>
   
 
+  
+
+  
+
+  
+
+
+  
+<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zNTAxOC8xMTU1NQ==">
+  <script type="text/javascript">
+    (function(d, s) {
+      var j, e = d.getElementsByTagName(s)[0];
+
+      if (typeof LivereTower === 'function') { return; }
+
+      j = d.createElement(s);
+      j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+      j.async = true;
+
+      e.parentNode.insertBefore(j, e);
+    })(document, 'script');
+  </script>
+  <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+  
 
           </div>
         </div>
@@ -266,8 +372,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,
